@@ -937,6 +937,7 @@ blockquote {
 /* --- Range (scope estimator) --- */
 .range { width: 100%; accent-color: var(--accent); }
 
+
 /* --- Quote / testimonial --- */
 .quote__text { color: var(--text); font-size: var(--step-1); line-height: var(--leading-snug); }
 .quote__text::before { content: '\201C'; color: var(--accent); }
@@ -1790,4 +1791,20 @@ main { counter-reset: sect; }
   .card { border: 1px solid #ccc; box-shadow: none; break-inside: avoid; }
   a { color: #000; text-decoration: underline; }
   .article, .prose { max-width: none; }
+}
+
+/* ===== 9. Mobile input zoom guard ======================================== */
+/* Placed last on purpose: mobile browsers zoom the page toward any focused
+   form control whose font is under 16px — that is what jumped the view when
+   you typed in the terminal (13px) and the API dropdown (12px). Bumping those
+   to 16px removes the trigger while leaving pinch-zoom enabled, which
+   low-vision visitors rely on. This sits after every component rule so it wins
+   on source order without needing inflated selectors. */
+@media (max-width: 640px) {
+  .input,
+  .textarea,
+  .select,
+  .api__select,
+  .term__input,
+  .term__form { font-size: 16px; }
 }
