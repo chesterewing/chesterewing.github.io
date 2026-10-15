@@ -1,0 +1,25 @@
+{
+  "name": "Chester Ewing Columna — Portfolio",
+  "short_name": "CEPC",
+  "description": "Backend Developer and Computer Engineer. Available for freelance.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b0e10",
+  "theme_color": "#0b0e10",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "images/logo-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "images/logo-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

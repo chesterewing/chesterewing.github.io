@@ -1,0 +1,33 @@
+/* TEAM */
+    Author:   Chester Ewing Columna
+    Role:     Backend Developer · Computer Engineer
+    Contact:  ce.columna404 [at] gmail.com
+    Twitter:  @_chstrr
+    LinkedIn: linkedin.com/in/chesterewing
+    From:     Aparri, Cagayan Valley, Philippines
+
+/* THANKS */
+    Computer Engineering faculty
+    The RxFY thesis team
+    Cebuanas Encoding Services
+    Everyone who reads my writing or hires me
+
+/* SITE */
+    Last update:    2026-10-15
+    Language:       English
+    Doctype:        HTML5
+    IDE:            Visual Studio Code
+    Stack:          HTML5, CSS3, vanilla JavaScript
+    Dependencies:   None
+    Type:           Poppins, JetBrains Mono (self-hosted)
+    PWA:            Yes (manifest.json + sw.js, offline-capable)
+    Hosting:        Static
+
+/* NOTES */
+    Rebuilt in October 2026: twelve pages became five, and jQuery, Bootstrap,
+    Owl Carousel, Magnific Popup, Modernizr, respond.js and SweetAlert2 were
+    all removed. One stylesheet, one script, no build step.
+
+    Content lives in JSON manifests (projects, showcase, tools, writing,
+    testimonials, availability, reading) so adding an entry never means
+    editing layout.

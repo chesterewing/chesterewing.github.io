@@ -1,0 +1,99 @@
+{
+  "_README": "Step-by-step guide for adding a new showcase entry. JSON does not support real comments, so these underscore-prefixed fields are ignored by the loader. Read these top to bottom before editing the items[] array below.",
+
+  "_STEP_1_DROP_THE_FOLDER": [
+    "Put your website folder inside /showcase/ in the project root.",
+    "Example final path:  c:\\Users\\programmer\\Desktop\\web\\showcase\\my-cafe-site\\",
+    "If the project arrived as a .zip:  right-click -> Extract All, then move the unzipped folder here.",
+    "Folder name = the slug. Use lowercase-with-dashes (good: my-cafe-site / bad: My Cafe Site)."
+  ],
+
+  "_STEP_2_REQUIRED_FILES_INSIDE_THE_FOLDER": [
+    "index.html  (REQUIRED — must sit directly inside the folder, not nested deeper)",
+    "any other assets the site needs (css/, js/, images/, fonts/, ...)",
+    "preview.jpg  (OPTIONAL — 1200x630 thumbnail. If missing, a gradient fallback is shown.)"
+  ],
+
+  "_STEP_3_OPTIONAL_PROTECT_THE_DEMO": [
+    "To deter casual right-click / F12 / view-source on a demo, add this line right before </body> in the demo's index.html:",
+    "<script src=\"../../js/protect.js\"></script>",
+    "WARNING: This is theatre. The browser must download source to render the page, so a determined visitor can still get the code via the Network tab or 'view-source:' URL prefix. Don't rely on it for real IP protection."
+  ],
+
+  "_STEP_4_ADD_AN_ENTRY_BELOW": [
+    "Copy the example object inside items[] and paste it as a new entry.",
+    "slug         -> MUST match the folder name exactly.",
+    "title        -> Display title on the card.",
+    "category     -> Small label above the title (e.g. 'Landing Page', 'E-commerce', 'Portfolio').",
+    "description  -> 1-2 sentence pitch. Shown on the card body.",
+    "price        -> Display string. Use any currency. Set to \"\" or remove to hide.",
+    "preview      -> Filename of the thumbnail inside the folder. Leave empty to use the gradient fallback.",
+    "tags         -> Array of short tech/style chips (e.g. [\"HTML\", \"CSS\", \"Responsive\"]).",
+    "buyUrl       -> Where the Buy button goes. mailto: works fine. Encode spaces as %20."
+  ],
+
+  "_STEP_5_SAVE_AND_REFRESH": [
+    "Save this file.",
+    "Open /showcase.html (run a local server first — see _LOCAL_SERVER_NOTE below).",
+    "The new card appears automatically — no other file edits needed."
+  ],
+
+  "_LOCAL_SERVER_NOTE": [
+    "fetch() is blocked on file:// in most browsers, so double-clicking showcase.html will show 'Could not load showcase'.",
+    "Fix it by serving the folder over http:",
+    "    cd c:\\Users\\programmer\\Desktop\\web",
+    "    python -m http.server 8000",
+    "Then visit  http://localhost:8000/showcase.html",
+    "Once deployed to real hosting (Netlify / Vercel / GitHub Pages), this caveat goes away."
+  ],
+
+  "_TROUBLESHOOTING": [
+    "Card shows but Open Demo 404s          -> slug doesn't match the folder name (case-sensitive on real hosts).",
+    "Thumbnail doesn't show                 -> 'preview' filename wrong, or the file isn't inside that demo's folder.",
+    "Manifest fails to load                 -> JSON syntax error. A trailing comma after the last item will break it.",
+    "Want to reorder cards                  -> reorder the objects in items[]. They render top-to-bottom in array order."
+  ],
+
+  "items": [
+    {
+      "slug": "saas-suite-bookings",
+      "title": "Forge — Bookings",
+      "category": "SaaS / Appointment CRUD",
+      "description": "Full appointment booking app: month calendar view with click-to-add, customer database, services catalog, status workflow (Pending → Confirmed → In Progress → Completed), drawer-based day view, Cmd+K search, dark mode, CSV export. Built for salons, repair shops, clinics, home services.",
+      "price": "₱22,500",
+      "preview": "preview.jpg",
+      "tags": ["HTML", "CSS", "JavaScript", "Calendar", "localStorage", "SaaS", "CRUD", "Responsive", "Dark Mode"],
+      "buyUrl": "mailto:ce.columna404@gmail.com?subject=Buying%20Forge%20Bookings"
+    },
+    {
+      "slug": "saas-suite-expenses",
+      "title": "Forge — Expenses",
+      "category": "SaaS / Expense Tracking",
+      "description": "Expense tracker with a spending overview, category breakdown, 6-month trend chart, full expense CRUD, custom categories with colour tags, payment-method and date-range filters, reports view, and CSV export. Persists to localStorage — no backend needed.",
+      "price": "₱18,500",
+      "preview": "preview.jpg",
+      "tags": ["HTML", "CSS", "JavaScript", "Charts", "localStorage", "SaaS", "CRUD", "Responsive", "Dark Mode"],
+      "buyUrl": "mailto:ce.columna404@gmail.com?subject=Buying%20Forge%20Expenses"
+    },
+    {
+      "slug": "saas-suite",
+      "title": "Forge — Inventory Suite",
+      "category": "SaaS / Inventory CRUD",
+      "description": "A working inventory management app: full CRUD, low-stock alerts, transaction logs (audit trail), search & filter by SKU/category, Cmd+K command palette, dark mode, CSV import/export. Persists to localStorage — no backend needed.",
+      "price": "₱18,500",
+      "preview": "preview.jpg",
+      "tags": ["HTML", "CSS", "JavaScript", "localStorage", "SaaS", "CRUD", "Responsive", "Dark Mode"],
+      "buyUrl": "mailto:ce.columna404@gmail.com?subject=Buying%20Forge%20Inventory%20Suite"
+    },
+    {
+      "slug": "demo-cafe",
+      "title": "Cafe Landing Page",
+      "category": "Landing Page",
+      "description": "A clean, single-page site for a small cafe — menu, hours, location, and a click-to-call button.",
+      "price": "₱4,500",
+      "preview": "preview.jpg",
+      "tags": ["HTML", "CSS", "Responsive"],
+      "buyUrl": "mailto:ce.columna404@gmail.com?subject=Buying%20Cafe%20Landing%20Page"
+    }
+  ]
+}

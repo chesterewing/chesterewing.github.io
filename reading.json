@@ -1,0 +1,9 @@
+{
+  "_README": "Edit when you start a new book. The 'Currently Reading' widget on the About page reads from here.",
+  "title": "Designing Data-Intensive Applications",
+  "author": "Martin Kleppmann",
+  "progress": 60,
+  "started": "2026-02-15",
+  "cover": "",
+  "_cover_note": "Set cover to a URL or path to a 200x300 image. Empty = uses the gradient fallback with the book's initials."
+}

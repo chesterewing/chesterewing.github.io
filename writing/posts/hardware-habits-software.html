@@ -1,0 +1,189 @@
+<!--
+  Author: Chester Ewing Columna
+  Post:   Hardware Habits That Made Me a Better Software Engineer
+-->
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Hardware Habits That Made Me a Better Software Engineer | Chester Ewing Columna</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Working with embedded systems teaches a different mindset — finite resources, no easy retries, read the datasheet. Those habits transfer.">
+	<meta name="author" content="Chester Ewing Columna">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Hardware Habits That Made Me a Better Software Engineer | Chester Ewing Columna">
+	<meta property="og:url" content="https://chesterewing.github.io/writing/posts/hardware-habits-software.html">
+	<meta property="og:image" content="https://chesterewing.github.io/images/og/writing.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Chester Ewing Columna — Backend Developer">
+	<meta property="og:site_name" content="Chester Ewing Columna Portfolio">
+	<meta property="og:description" content="Working with embedded systems teaches a different mindset — finite resources, no easy retries, read the datasheet. Those habits transfer.">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Hardware Habits That Made Me a Better Software Engineer | Chester Ewing Columna">
+	<meta name="twitter:image" content="https://chesterewing.github.io/images/og/writing.png">
+
+	<link rel="canonical" href="https://chesterewing.github.io/writing/posts/hardware-habits-software.html">
+
+<link rel="icon" href="../../images/logo-mark.svg">
+<link rel="manifest" href="../../manifest.json">
+<meta name="theme-color" content="#0b0e10">
+<link rel="stylesheet" href="../../css/fonts.css">
+<link rel="stylesheet" href="../../css/app.css">
+
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('cec-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <div class="container">
+    <a class="brand" href="../../index.html" aria-label="Chester Ewing Columna — home">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="1.25" y="1.25" width="29.5" height="29.5" rx="8" stroke="currentColor" stroke-opacity=".18" stroke-width="1.5"/>
+        <path d="M20.5 10.64A7 7 0 1 0 20.5 21.36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="24.2" cy="16" r="2.3" fill="var(--accent)"/>
+      </svg>
+      <span class="brand-text"><b>Chester</b> <span>Columna</span></span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="../../index.html">Home</a>
+      <a href="../../work.html">Work</a>
+      <a href="../../about.html">About</a>
+      <a href="../../writing.html">Writing</a>
+      <a href="../../contact.html">Hire me</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle" data-cmdk type="button" aria-label="Search — Ctrl+K" title="Search — Ctrl+K">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+        </svg>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </button>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section">
+    <div class="container">
+      <article class="article">
+			<a href="../../writing.html" class="post-back">← Back to writing</a>
+
+			<h1>Hardware Habits That Made Me a Better Software Engineer</h1>
+			<div class="post-meta">December 30, 2025 · 4 min read · hardware · embedded · craft</div>
+
+			<p>I started doing embedded projects in school — Arduino, Raspberry Pi, the occasional KiCad board. I figured the skills would mostly stay separate from the web work I was doing on the side. They didn't. The mindset of working with hardware turned out to fix bad habits I didn't even know I had as a software developer.</p>
+
+			<p>Five things hardware taught me that I now use every day in backend code:</p>
+
+			<h2>1. Resources are not free</h2>
+			<p>On a microcontroller you have maybe 32 KB of RAM. You can't just allocate a 10MB array because you forgot to clean it up — there isn't a 10MB array to allocate. You think about memory before you write. You free things deliberately.</p>
+
+			<p>In high-level languages it's easy to forget that any of this exists. Then your Node.js process eats 4GB and crashes the server, and suddenly you wish you'd been careful. Hardware made me ask, on every chunk of code: <em>how big does this get? Does it grow forever? When does it get released?</em></p>
+
+			<h2>2. There's no "just retry"</h2>
+			<p>If your sensor read fails, you can't pop a toast and ask the user to refresh. You handle it now or the system fails. Web developers reach for retries reflexively — sometimes that's right, often it's hiding a bug that should be fixed at the source. Hardware forces you to think about <em>what should happen when this never works</em>, not just <em>what should happen when this eventually works</em>.</p>
+
+			<blockquote>Retries are a wonderful tool. They're also a wonderful place to bury problems.</blockquote>
+
+			<h2>3. Read the datasheet</h2>
+			<p>If you're using a sensor, the datasheet has the answer. Not a Stack Overflow post. Not a YouTube tutorial. The actual document the manufacturer wrote, with timing diagrams and edge cases nobody has bothered to blog about. It's boring. It's also the truth.</p>
+
+			<p>Software has datasheets too — they're called specs, RFCs, and source code. When I'm stuck on a library now, I open the source instead of searching. The answer is usually there in five minutes. The blog post that doesn't quite match my version would have taken an hour.</p>
+
+			<h2>4. Test in the real environment, not the simulator</h2>
+			<p>Code that works on the breadboard at room temperature doesn't always work in a hot enclosure with a noisy power supply. Embedded engineers test where the thing will actually live. Software engineers — me included — used to skip that step and trust the unit tests on my MacBook.</p>
+
+			<p>Now I deploy to staging environments that look like production: same OS, same database version, same network conditions. The bugs that hide in your laptop's perfect environment are the bugs your users are going to hit.</p>
+
+			<h2>5. If it's not deterministic, you don't understand it yet</h2>
+			<p>An LED that lights up "sometimes" is a bug, not a feature. Either it always lights when the conditions are met, or you don't actually know the conditions. Hardware is unforgiving about this. You can't ship "works most of the time."</p>
+
+			<p>I now treat flaky tests, intermittent timeouts, and "weird, it worked yesterday" the same way. Those are signals that a model in my head is wrong, not problems to retry past. Find the determinism. The bug is hiding in whatever assumption is failing intermittently.</p>
+
+			<h2>The real lesson</h2>
+			<p>Software is forgiving in ways hardware isn't. You can leak memory and the OS will probably clean it up. You can ship buggy code and patch it tomorrow. You can wave at a flaky test and merge anyway. Hardware doesn't let you do any of those things, and developing under those constraints — even briefly — calibrates your sense of "good enough" upward.</p>
+
+			<p>I write web backends now, not firmware. But the discipline carries. Production code that handles real money, real people, and real data deserves the same care a sensor on a board does. Both will fail in front of a user who cannot retry.</p>
+
+			<p class="muted mt-7">Have a hardware/software project you want to talk about? <a href="../../contact.html">I'm always up for it</a>.</p>
+		</article>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <h3>Chester Ewing Columna</h3>
+        <p class="muted">Backend developer and computer engineer in Aparri, Cagayan Valley, Philippines.</p>
+      </div>
+      <div>
+        <h3>Pages</h3>
+        <ul>
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../work.html">Work</a></li>
+          <li><a href="../../about.html">About</a></li>
+          <li><a href="../../writing.html">Writing</a></li>
+          <li><a href="../../contact.html">Hire me</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Elsewhere</h3>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/chesterewing/" rel="noopener" target="_blank">LinkedIn</a></li>
+          <li><a href="https://x.com/_chstrr" rel="noopener" target="_blank">X / Twitter</a></li>
+          <li><a href="mailto:ce.columna404@gmail.com">Email</a></li>
+          <li><a href="../../feed.xml">RSS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Jump to</h3>
+        <ul class="muted">
+          <li><kbd>g</kbd> <kbd>h</kbd> &nbsp;Home</li>
+          <li><kbd>g</kbd> <kbd>w</kbd> &nbsp;Work</li>
+          <li><kbd>g</kbd> <kbd>a</kbd> &nbsp;About</li>
+          <li><kbd>g</kbd> <kbd>c</kbd> &nbsp;Hire me</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; 2026 Chester Ewing Columna</span>
+      <span>Hand-written HTML, CSS and vanilla JS. No framework, no tracking.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="to-top" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 13V3m0 0L4 7m4-4 4 4"/></svg>
+</button>
+
+<script src="../../js/app.js" defer></script>
+
+</body>
+</html>

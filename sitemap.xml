@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sitemap. The host below is set by ../set-domain.js — run
+  `node set-domain.js <host>` from the Portfolio folder to change it
+  everywhere at once rather than editing URLs by hand.
+  Author: Chester Ewing Columna
+
+  404.html is deliberately absent (it carries robots: noindex).
+  When you publish a post, add it to writing/index.json AND add a <url> here.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core pages -->
+  <url>
+    <loc>https://chesterewing.github.io/index.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://chesterewing.github.io/work.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://chesterewing.github.io/contact.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://chesterewing.github.io/about.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://chesterewing.github.io/writing.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project case studies -->
+  <url>
+    <loc>https://chesterewing.github.io/projects/rxfy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://chesterewing.github.io/projects/portfolio.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Writing -->
+  <url>
+    <loc>https://chesterewing.github.io/writing/posts/data-encoder-to-backend.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://chesterewing.github.io/writing/posts/rxfy-thesis-lessons.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://chesterewing.github.io/writing/posts/hardware-habits-software.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://chesterewing.github.io/writing/posts/hello-world.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Showcase demos (public, buyable) -->
+  <url>
+    <loc>https://chesterewing.github.io/showcase/saas-suite-bookings/index.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://chesterewing.github.io/showcase/saas-suite-expenses/index.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://chesterewing.github.io/showcase/saas-suite/index.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://chesterewing.github.io/showcase/demo-cafe/index.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+</urlset>

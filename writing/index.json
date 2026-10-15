@@ -1,0 +1,39 @@
+{
+  "_README": "Writing/blog manifest. Each item appears as a row on /writing.html. Each post lives in /writing/posts/<slug>.html.",
+  "_HOW_TO_ADD": [
+    "1) Create /writing/posts/<slug>.html — your full post.",
+    "2) Add an entry below: slug, title, date (YYYY-MM-DD), excerpt, tags[].",
+    "3) Save & refresh /writing.html. Posts sort by date descending.",
+    "4) The post HTML can use any styling — link back to /writing.html with a 'back' button."
+  ],
+  "items": [
+    {
+      "slug": "data-encoder-to-backend",
+      "title": "From Data Encoder to Backend Dev — The Long Way Around",
+      "date": "2026-04-22",
+      "excerpt": "Five years ago I was typing logs into spreadsheets at a TV relay station. Today I design REST APIs for a SaaS platform. Here's what the slow path taught me.",
+      "tags": ["career", "backend", "story"]
+    },
+    {
+      "slug": "rxfy-thesis-lessons",
+      "title": "What RxFY Taught Me About Shipping Real Software",
+      "date": "2026-02-08",
+      "excerpt": "My thesis was a real-time monitoring system for antibiotic purchases. The grade was good. The lessons were better — most of them about the parts of software that aren't code.",
+      "tags": ["thesis", "rxfy", "lessons"]
+    },
+    {
+      "slug": "hardware-habits-software",
+      "title": "Hardware Habits That Made Me a Better Software Engineer",
+      "date": "2025-12-30",
+      "excerpt": "Soldering doesn't translate to typescript. But the mindset of working with embedded systems — finite resources, no easy retries, and read the datasheet — turns out to fix a lot of bad software habits too.",
+      "tags": ["hardware", "embedded", "craft"]
+    },
+    {
+      "slug": "hello-world",
+      "title": "Hello, World — Why I Started This Site",
+      "date": "2025-11-12",
+      "excerpt": "A quick note on why I rebuilt my portfolio, what I want it to do for me, and what's next on the roadmap.",
+      "tags": ["meta", "portfolio"]
+    }
+  ]
+}

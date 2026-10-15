@@ -1,0 +1,11 @@
+# Author: Chester Ewing Columna
+# Allow all crawlers full access; replace example.com with the real domain after deploy.
+
+User-agent: *
+Allow: /
+
+# Block local manifests so search engines don't index them as content
+Disallow: /showcase/index.json
+Disallow: /tools/index.json
+
+Sitemap: https://chesterewing.github.io/sitemap.xml

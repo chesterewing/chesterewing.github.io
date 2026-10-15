@@ -1,0 +1,521 @@
+<!--
+  Author: Chester Ewing Columna
+  Page:   About — story, career history, skills
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Chester Ewing Columna</title>
+<meta name="description" content="Chester Ewing Columna — backend developer and computer engineer in Aparri, Cagayan Valley. Five roles from data encoder to backend developer, and what each one taught me.">
+<meta name="author" content="Chester Ewing Columna">
+<link rel="canonical" href="https://chesterewing.github.io/about.html">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="About — Chester Ewing Columna">
+<meta property="og:url" content="https://chesterewing.github.io/about.html">
+<meta property="og:image" content="https://chesterewing.github.io/images/og/about.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Chester Ewing Columna — Backend Developer">
+<meta property="og:site_name" content="Chester Ewing Columna">
+<meta property="og:description" content="Five roles from data encoder to backend developer, and what each one taught me.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About — Chester Ewing Columna">
+<meta name="twitter:image" content="https://chesterewing.github.io/images/og/about.png">
+
+<link rel="icon" href="images/logo-mark.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b0e10">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/app.css">
+
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('cec-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="Chester Ewing Columna — home">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="1.25" y="1.25" width="29.5" height="29.5" rx="8" stroke="currentColor" stroke-opacity=".18" stroke-width="1.5"/>
+        <path d="M20.5 10.64A7 7 0 1 0 20.5 21.36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="24.2" cy="16" r="2.3" fill="var(--accent)"/>
+      </svg>
+      <span class="brand-text"><b>Chester</b> <span>Columna</span></span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="writing.html">Writing</a>
+      <a href="contact.html">Hire me</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle" data-cmdk type="button" aria-label="Search — Ctrl+K" title="Search — Ctrl+K">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+        </svg>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </button>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="container">
+      <p class="kicker">About</p>
+      <h1>The long way around.</h1>
+      <p class="lead">
+        I started by typing broadcast logs into spreadsheets at a TV relay station in Aparri.
+        Six years later I design REST APIs for a SaaS platform. Nothing about that path was
+        fast, and almost all of it turned out to be useful.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Profile + core content (sticky sidebar) ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="with-aside">
+      <aside class="profile-card reveal">
+        <img class="profile-card__img" src="images/about.jpg" alt="Chester Ewing Columna"
+             width="520" height="520" loading="lazy" decoding="async">
+        <h2 class="profile-card__name">Chester Ewing Columna</h2>
+        <p class="profile-card__role">Backend Developer &middot; Computer Engineer</p>
+
+        <div class="profile-card__badges">
+          <span class="chip chip--accent">Open to work</span>
+          <span class="chip">Freelance</span>
+        </div>
+
+        <dl>
+          <div><dt>Email</dt><dd><a href="mailto:ce.columna404@gmail.com">ce.columna404@gmail.com</a></dd></div>
+          <div><dt>Location</dt><dd>Aparri, Cagayan Valley, PH</dd></div>
+          <div><dt>Timezone</dt><dd>Asia/Manila &middot; UTC+8</dd></div>
+          <div><dt>Current</dt><dd>Cebuanas Encoding Services<br><span class="subtle"><span data-tenure-phrase="bare" data-tenure-start="2025-11-07">&mdash;</span> in role</span></dd></div>
+        </dl>
+
+        <div class="profile-card__social">
+          <a href="https://www.linkedin.com/in/chesterewing/" rel="noopener" target="_blank" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.4 8.65 21 11 21 14.1V21h-4v-6.1c0-1.45-.03-3.3-2-3.3-2 0-2.3 1.57-2.3 3.2V21H9z"/></svg>
+          </a>
+          <a href="https://x.com/_chstrr" rel="noopener" target="_blank" aria-label="X" title="X / Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L5.9 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.7zM17.8 20h1.7L7.3 3.8H5.5z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/ChesterEwingColumna" rel="noopener" target="_blank" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
+          </a>
+          <a href="assets/chester_ewing_columna_resume.pdf" download aria-label="Download résumé" title="Résumé (PDF)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v11m0 0-4-4m4 4 4-4M4 19h16"/></svg>
+          </a>
+        </div>
+      </aside>
+        <div>
+  <!-- ===== Story ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="prose reveal">
+          <p class="kicker">My story</p>
+          <h2 class="mt-3">Hardware habits, software job</h2>
+          <p class="mt-5">
+            I trained as a Computer Engineer, which means my first instinct around a problem is
+            to ask what it costs &mdash; in memory, in queries, in the three a.m. phone call when
+            something fails. Embedded work gives you finite resources and no easy retries. That
+            turns out to fix a lot of bad software habits.
+          </p>
+          <p>
+            Four and a half years as a data encoder taught me something less glamorous and
+            probably more valuable: that most systems fail at the boring edges. Bad input, a
+            missing validation, a report nobody reconciled. I write backends like someone who
+            has been on the receiving end of a broken one.
+          </p>
+          <p>
+            Now I build the backend behind <strong>RocketServe</strong> &mdash; APIs, auth, schema,
+            and the business logic that moves jobs between process-serving agencies and the
+            servers who work them.
+          </p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Experience ===== -->
+  <section class="section section--inset" id="experience">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">Career</p>
+        <h2 class="mt-3">Where I&rsquo;ve worked</h2>
+        <p class="lead">Five roles, each one pointed a little further toward backend.</p>
+      </div>
+
+      <div class="timeline">
+
+        <article class="timeline__item timeline__item--now reveal">
+          <p class="timeline__date">Nov 2025 &mdash; Present</p>
+          <h3 class="timeline__title">Backend Developer</h3>
+          <p class="timeline__org">Cebuanas Encoding Services &middot; <span data-tenure-phrase="bare" data-tenure-start="2025-11-07">&mdash;</span> in</p>
+          <p class="timeline__body">
+            Designing and building the backend services that power RocketServe &mdash; a cloud
+            platform for process-serving agencies and independent process servers. REST APIs,
+            authentication, database schema, and the business logic that handles job
+            distribution and subscriptions.
+          </p>
+          <div class="chips mt-3">
+            <span class="chip">Node.js</span><span class="chip">REST API</span><span class="chip">MySQL</span>
+            <span class="chip">Authentication</span><span class="chip">Cloud / SaaS</span>
+          </div>
+        </article>
+
+        <article class="timeline__item reveal">
+          <p class="timeline__date">Mar 2025 &mdash; Jun 2025</p>
+          <h3 class="timeline__title">Data Management Analyst</h3>
+          <p class="timeline__org">One Visaya Gaming Corp.</p>
+          <p class="timeline__body">
+            Improved data workflows for efficiency and accuracy, oversaw gameplay testing,
+            documented issues, and surfaced insights that helped refine product quality.
+          </p>
+          <div class="chips mt-3">
+            <span class="chip">QA</span><span class="chip">Data workflows</span><span class="chip">Documentation</span>
+          </div>
+        </article>
+
+        <article class="timeline__item reveal">
+          <p class="timeline__date">Oct 2024 &mdash; Mar 2025</p>
+          <h3 class="timeline__title">Data Analyst</h3>
+          <p class="timeline__org">Interactech Solutions Inc.</p>
+          <p class="timeline__body">
+            Ensured data accuracy and integrity through product and gameplay testing, analyzed
+            trends, and generated reports with SQL and Excel to drive quality improvements.
+          </p>
+          <div class="chips mt-3">
+            <span class="chip">SQL</span><span class="chip">Excel</span><span class="chip">Power BI</span>
+          </div>
+        </article>
+
+        <article class="timeline__item reveal">
+          <p class="timeline__date">2024</p>
+          <h3 class="timeline__title">RxFY thesis defended</h3>
+          <p class="timeline__org">B.S. Computer Engineering</p>
+          <p class="timeline__body">
+            Graduated with a real-time monitoring system for antibiotic purchases, built with a
+            four-person team. The lessons from it still shape how I write code &mdash; most of
+            them were not about code.
+          </p>
+          <div class="chips mt-3">
+            <span class="chip">PHP</span><span class="chip">Node.js</span><span class="chip">MySQL</span>
+          </div>
+        </article>
+
+        <article class="timeline__item reveal">
+          <p class="timeline__date">Jan 2023 &mdash; Jul 2024</p>
+          <h3 class="timeline__title">IT Technician</h3>
+          <p class="timeline__org">Lyceum of Aparri Hospital</p>
+          <p class="timeline__body">
+            First role with a hardware/software split. Troubleshot hardware and software issues,
+            supported IT systems, and managed data flow to keep hospital operations running.
+            Learned the value of patience, and of fixing the unfixable.
+          </p>
+          <div class="chips mt-3">
+            <span class="chip">Windows</span><span class="chip">Linux</span><span class="chip">Networking</span><span class="chip">Helpdesk</span>
+          </div>
+        </article>
+
+        <article class="timeline__item reveal">
+          <p class="timeline__date">Dec 2019 &mdash; Jul 2024</p>
+          <h3 class="timeline__title">Data Encoder</h3>
+          <p class="timeline__org">GMA TV-13 Relay Station</p>
+          <p class="timeline__body">
+            First professional role. Four and a half years of disciplined data work &mdash;
+            entering and managing broadcast and operational data for reliable reporting. The
+            foundation everything else was built on.
+          </p>
+          <div class="chips mt-3">
+            <span class="chip">Excel</span><span class="chip">Reporting</span><span class="chip">Operations</span>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="mt-7">
+        <a class="btn btn--ghost" href="assets/chester_ewing_columna_resume.pdf" download>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 2v8m0 0L5 7m3 3 3-3M3 13h10"/></svg>
+          Download full résumé (PDF)
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Skills ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">Toolkit</p>
+        <h2 class="mt-3">What I work with</h2>
+        <p class="lead">Grouped by what I reach for, not by how confident I want to look.</p>
+      </div>
+
+      <dl class="deflist reveal">
+        <div class="defrow">
+          <dt>Backend</dt>
+          <dd><div class="chips">
+            <span class="chip chip--accent">Node.js</span><span class="chip chip--accent">PHP</span>
+            <span class="chip chip--accent">REST APIs</span><span class="chip chip--accent">Authentication</span>
+          </div></dd>
+        </div>
+        <div class="defrow">
+          <dt>Databases</dt>
+          <dd><div class="chips"><span class="chip">MySQL</span><span class="chip">SQL</span></div></dd>
+        </div>
+        <div class="defrow">
+          <dt>Front-end</dt>
+          <dd><div class="chips">
+            <span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">JavaScript</span>
+            <span class="chip">Bootstrap</span><span class="chip">jQuery</span>
+          </div></dd>
+        </div>
+        <div class="defrow">
+          <dt>Languages</dt>
+          <dd><div class="chips"><span class="chip">C++</span><span class="chip">Python</span><span class="chip">Java</span><span class="chip">Bash</span></div></dd>
+        </div>
+        <div class="defrow">
+          <dt>Hardware</dt>
+          <dd><div class="chips">
+            <span class="chip">Arduino</span><span class="chip">Raspberry Pi</span>
+            <span class="chip">KiCad</span><span class="chip">Embedded firmware</span>
+          </div></dd>
+        </div>
+        <div class="defrow">
+          <dt>Data &amp; ops</dt>
+          <dd><div class="chips">
+            <span class="chip">Git</span><span class="chip">Excel</span><span class="chip">Power BI</span>
+            <span class="chip">Linux admin</span><span class="chip">Windows admin</span>
+          </div></dd>
+        </div>
+        <div class="defrow">
+          <dt>Spoken</dt>
+          <dd><div class="chips">
+            <span class="chip">Ilocano &mdash; native</span>
+            <span class="chip">Filipino / Tagalog &mdash; native</span>
+            <span class="chip">English &mdash; conversational</span>
+          </div></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+
+
+      <!-- ===== Terminal =====
+           A real one: command history, tab completion, and commands that read
+           the same JSON manifests the rest of the site does. -->
+      <section class="section" id="terminal-section">
+        <div class="section-head">
+          <p class="kicker">Shell</p>
+          <h2 class="mt-3">Ask me yourself</h2>
+          <p class="lead">
+            This is a working terminal, not a picture of one. Type <code>help</code>,
+            press Tab to complete, press &uarr; to recall. A few commands are not in
+            the help list.
+          </p>
+        </div>
+
+        <div class="win code-surface reveal" id="terminal">
+          <div class="term__status">
+            <span>Aparri, PH</span>
+            <span>Asia/Manila</span>
+            <span class="spacer"></span>
+            <b id="status-clock">--:--:--</b>
+          </div>
+          <div class="win__bar">
+            <span class="win__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="win__title">visitor@chestercolumna: ~</span>
+          </div>
+
+          <div class="term__body" id="term-out" role="log" aria-live="polite" aria-label="Terminal output">
+            <pre class="term__ascii" id="term-ascii" aria-hidden="true"></pre>
+          </div>
+
+          <form class="term__form" id="term-form" style="padding:0 var(--sp-5) var(--sp-4);font-family:var(--font-mono);font-size:.8125rem">
+            <span class="term__prompt">visitor@chestercolumna:~$</span>
+            <label class="sr-only" for="term-input">Terminal input</label>
+            <input class="term__input" id="term-input" type="text" autocomplete="off"
+                   autocapitalize="off" spellcheck="false" aria-label="Type a command">
+          </form>
+
+          <div class="term__hint">
+            <button class="chip chip--filter" type="button" data-term-cmd="help">help</button>
+            <button class="chip chip--filter" type="button" data-term-cmd="whoami">whoami</button>
+            <button class="chip chip--filter" type="button" data-term-cmd="skills">skills</button>
+            <button class="chip chip--filter" type="button" data-term-cmd="projects">projects</button>
+            <button class="chip chip--filter" type="button" data-term-cmd="neofetch">neofetch</button>
+            <button class="chip chip--filter" type="button" data-term-cmd="contact">contact</button>
+          </div>
+        </div>
+      </section>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GitHub activity =====
+       Set data-user to a GitHub username to switch this on. While it is empty
+       the whole section removes itself, so a visitor never sees setup text. -->
+  <section class="section section--inset" data-gh-section>
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">Open source</p>
+        <h2 class="mt-3">Recent activity</h2>
+      </div>
+      <div class="card reveal" id="gh-graph" data-user="chesterewing"></div>
+    </div>
+  </section>
+
+  <!-- ===== Tools I use ===== -->
+  <section class="section" id="uses">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">Uses</p>
+        <h2 class="mt-3">Tools I actually use</h2>
+        <p class="lead">
+          Free or near-free things I reach for most weeks. Rendered from
+          <code>tools/index.json</code> &mdash; I add to it when something earns a place.
+        </p>
+      </div>
+
+      <div class="grid" id="tools-grid">
+        <p class="empty">Loading tools&hellip;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Off the clock ===== -->
+  <section class="section section--inset">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">Off the clock</p>
+        <h2 class="mt-3">Reading and whereabouts</h2>
+      </div>
+
+      <div class="grid grid--2">
+        <div class="card reveal">
+          <p class="kicker">Currently reading</p>
+          <div class="mt-4" id="reading"></div>
+        </div>
+
+        <div class="card reveal">
+          <p class="kicker">Based in</p>
+          <h3 class="mt-4">Aparri, Cagayan Valley</h3>
+          <p class="muted">
+            Northern tip of Luzon, Philippines. Asia/Manila &mdash; UTC+8. Comfortable working
+            with clients across time zones; most of my freelance work happens evenings and weekends.
+          </p>
+          <p class="mt-3">
+            <a class="link-arrow" href="https://maps.google.com/?q=Aparri,Cagayan,Philippines" rel="noopener" target="_blank">
+              Open in Google Maps
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="cta reveal">
+        <p class="kicker" style="justify-content:center">Say hi</p>
+        <h2 class="mt-4">Still reading? Let&rsquo;s talk.</h2>
+        <p class="lead">
+          Freelance backend and full-stack work, short consulting on small SaaS or API
+          projects, or just saying hi to another dev in the Philippines.
+        </p>
+        <div class="row">
+          <a class="btn btn--primary" href="contact.html">Get in touch</a>
+          <a class="btn btn--ghost" href="work.html">See my work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <h3>Chester Ewing Columna</h3>
+        <p class="muted">Backend developer and computer engineer in Aparri, Cagayan Valley, Philippines.</p>
+      </div>
+      <div>
+        <h3>Pages</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="writing.html">Writing</a></li>
+          <li><a href="contact.html">Hire me</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Elsewhere</h3>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/chesterewing/" rel="noopener" target="_blank">LinkedIn</a></li>
+          <li><a href="https://x.com/_chstrr" rel="noopener" target="_blank">X / Twitter</a></li>
+          <li><a href="https://www.facebook.com/ChesterEwingColumna" rel="noopener" target="_blank">Facebook</a></li>
+          <li><a href="mailto:ce.columna404@gmail.com">Email</a></li>
+          <li><a href="feed.xml">RSS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Jump to</h3>
+        <ul class="muted">
+          <li><kbd>g</kbd> <kbd>h</kbd> &nbsp;Home</li>
+          <li><kbd>g</kbd> <kbd>w</kbd> &nbsp;Work</li>
+          <li><kbd>g</kbd> <kbd>a</kbd> &nbsp;About</li>
+          <li><kbd>g</kbd> <kbd>c</kbd> &nbsp;Hire me</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; 2026 Chester Ewing Columna</span>
+      <span>Hand-written HTML, CSS and vanilla JS. No framework, no tracking.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="to-top" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 13V3m0 0L4 7m4-4 4 4"/></svg>
+</button>
+
+<script src="js/app.js" defer></script>
+</body>
+</html>

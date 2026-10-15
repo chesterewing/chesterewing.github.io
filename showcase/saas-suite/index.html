@@ -1,0 +1,510 @@
+<!--
+  Forge — Inventory Suite (Demo)
+  Module 1 of 3: Inventory & Spare Parts Management
+  Author: Chester Ewing Columna
+  Storage: localStorage only (no backend) — full CRUD reference
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Forge — Inventory Suite</title>
+  <meta name="description" content="A modern inventory management demo — full CRUD, stock alerts, transaction logs, and search/filter. Built by Chester Ewing Columna.">
+  <meta name="author" content="Chester Ewing Columna">
+  <meta name="theme-color" content="#10b981">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<!-- Initial loading splash (shown until JS hides it) -->
+<div class="boot-splash" id="boot-splash">
+  <div class="boot-spinner" aria-hidden="true"></div>
+  <div class="boot-text">Loading Forge…</div>
+</div>
+
+<!-- App shell -->
+<div class="app" id="app" hidden>
+
+  <!-- =================== SIDEBAR =================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+    <div class="sidebar-brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">Forge</div>
+        <div class="brand-sub">Inventory Suite</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item" data-view="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="nav-item is-active" data-view="products">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>
+        <span>Products</span>
+        <span class="nav-badge" id="nav-products-count">0</span>
+      </button>
+      <button class="nav-item" data-view="transactions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7H3"></path><path d="M21 12H3"></path><path d="M21 17H3"></path></svg>
+        <span>Transactions</span>
+        <span class="nav-badge" id="nav-transactions-count">0</span>
+      </button>
+      <button class="nav-item" data-view="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-tip">
+      <div class="sidebar-tip-title">Pro tip</div>
+      <div class="sidebar-tip-text">Press <kbd>Ctrl</kbd>+<kbd>K</kbd> anywhere to jump to any product or action.</div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="btn btn-ghost btn-sm btn-block" id="reset-demo-btn" title="Wipe localStorage and re-seed demo data">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+        Reset demo
+      </button>
+    </div>
+  </aside>
+
+  <!-- Sidebar backdrop (mobile) -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <!-- =================== MAIN COLUMN =================== -->
+  <div class="main-column">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <button class="icon-btn topbar-menu" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <button class="cmdk-trigger" id="cmdk-trigger" aria-label="Open command palette">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <span class="cmdk-trigger-label">Search products, jump to actions…</span>
+        <span class="cmdk-trigger-kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+      </button>
+
+      <div class="topbar-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <div class="user-chip" tabindex="0" role="button" aria-label="Account">
+          <div class="user-avatar">CC</div>
+          <div class="user-meta">
+            <div class="user-name">Chester</div>
+            <div class="user-role">
+              <span class="user-role-dot"></span>Admin
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE BODY -->
+    <main class="page-body">
+
+      <!-- ============ DASHBOARD VIEW ============ -->
+      <section class="view" data-view="dashboard" hidden>
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-sub">A quick read on stock health and recent activity.</p>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="dashboard-stats"></div>
+
+        <div class="dashboard-grid">
+          <article class="panel">
+            <header class="panel-header">
+              <h2 class="panel-title">Low stock — needs reordering</h2>
+              <button class="link-btn" data-view-jump="products" data-filter-status="low">View all →</button>
+            </header>
+            <div class="panel-body" id="dashboard-low-stock"></div>
+          </article>
+
+          <article class="panel">
+            <header class="panel-header">
+              <h2 class="panel-title">Recent movements</h2>
+              <button class="link-btn" data-view-jump="transactions">Open log →</button>
+            </header>
+            <div class="panel-body" id="dashboard-recent-tx"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ PRODUCTS VIEW ============ -->
+      <section class="view is-active" data-view="products">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1 class="page-title">Inventory</h1>
+            <p class="page-sub">Manage products, monitor stock levels, and log every movement.</p>
+          </div>
+          <div class="page-header-actions">
+            <label class="btn btn-secondary" id="import-btn-label" for="import-file">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <span>Import CSV</span>
+              <input type="file" id="import-file" accept=".csv,text/csv" hidden>
+            </label>
+            <button class="btn btn-secondary" id="export-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Export CSV
+            </button>
+            <button class="btn btn-primary" id="add-product-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+              Add product
+            </button>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="products-stats"></div>
+
+        <div class="toolbar">
+          <div class="search-field">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+            <input type="search" id="search-input" placeholder="Search by name, SKU, or category…" autocomplete="off">
+            <button class="search-clear" id="search-clear" aria-label="Clear" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+            </button>
+          </div>
+          <select class="filter-select" id="filter-category">
+            <option value="">All categories</option>
+          </select>
+          <select class="filter-select" id="filter-status">
+            <option value="">All status</option>
+            <option value="in">In stock</option>
+            <option value="low">Low stock</option>
+            <option value="out">Out of stock</option>
+          </select>
+          <div class="toolbar-spacer"></div>
+          <div class="view-toggle" role="tablist" aria-label="View mode">
+            <button class="view-toggle-btn is-active" data-mode="table" aria-label="Table view" title="Table view">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4"></path><path d="M3 9h18"></path><path d="M3 15h18"></path><path d="M15 3h4a2 2 0 0 1 2 2v4"></path><path d="M21 15v4a2 2 0 0 1-2 2h-4"></path><path d="M9 21H5a2 2 0 0 1-2-2v-4"></path></svg>
+            </button>
+            <button class="view-toggle-btn" data-mode="grid" aria-label="Grid view" title="Grid view">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="14" rx="1"></rect><rect width="7" height="7" x="3" y="14" rx="1"></rect></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="products-container" id="products-container">
+          <!-- Skeleton state (shown briefly on load) -->
+          <div class="skeleton-card" id="products-skeleton"></div>
+        </div>
+      </section>
+
+      <!-- ============ TRANSACTIONS VIEW ============ -->
+      <section class="view" data-view="transactions" hidden>
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1 class="page-title">Transaction log</h1>
+            <p class="page-sub">Every stock movement, time-stamped and immutable — your audit trail.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-secondary" id="export-tx-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Export log
+            </button>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="search-field">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+            <input type="search" id="tx-search-input" placeholder="Search by product, SKU, or note…" autocomplete="off">
+          </div>
+          <select class="filter-select" id="tx-filter-type">
+            <option value="">All types</option>
+            <option value="in">Stock IN</option>
+            <option value="out">Stock OUT</option>
+            <option value="create">Created</option>
+            <option value="update">Updated</option>
+            <option value="delete">Deleted</option>
+          </select>
+        </div>
+
+        <div class="panel">
+          <div class="panel-body panel-body--flush" id="transactions-container"></div>
+        </div>
+      </section>
+
+      <!-- ============ SETTINGS VIEW ============ -->
+      <section class="view" data-view="settings" hidden>
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1 class="page-title">Settings</h1>
+            <p class="page-sub">Configure your workspace. Stored locally on this device.</p>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <article class="panel">
+            <header class="panel-header">
+              <h2 class="panel-title">Workspace</h2>
+            </header>
+            <div class="panel-body">
+              <div class="form-field">
+                <label for="setting-brand">Brand name</label>
+                <input type="text" id="setting-brand" placeholder="Forge">
+              </div>
+              <div class="form-field">
+                <label for="setting-currency">Currency symbol</label>
+                <input type="text" id="setting-currency" maxlength="3" placeholder="₱">
+              </div>
+              <div class="form-field">
+                <label for="setting-threshold">Default low-stock threshold</label>
+                <input type="number" id="setting-threshold" min="0" step="1" placeholder="5">
+              </div>
+              <button class="btn btn-primary" id="settings-save-btn">Save settings</button>
+            </div>
+          </article>
+
+          <article class="panel">
+            <header class="panel-header">
+              <h2 class="panel-title">Appearance</h2>
+            </header>
+            <div class="panel-body">
+              <div class="theme-picker">
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="light">
+                  <span class="theme-swatch theme-swatch--light"></span>
+                  <span>Light</span>
+                </label>
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="dark">
+                  <span class="theme-swatch theme-swatch--dark"></span>
+                  <span>Dark</span>
+                </label>
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="auto">
+                  <span class="theme-swatch theme-swatch--auto"></span>
+                  <span>System</span>
+                </label>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <header class="panel-header">
+              <h2 class="panel-title">Data</h2>
+            </header>
+            <div class="panel-body">
+              <p class="muted">All your products and transactions live in this browser's localStorage. Clear browser data or click reset to wipe.</p>
+              <div class="stack-row">
+                <button class="btn btn-secondary" id="export-all-btn">Export all (JSON)</button>
+                <button class="btn btn-secondary" id="import-all-btn">
+                  Import JSON
+                  <input type="file" id="import-all-file" accept=".json,application/json" hidden>
+                </button>
+                <button class="btn btn-danger" id="wipe-all-btn">Wipe everything</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <header class="panel-header">
+              <h2 class="panel-title">About this demo</h2>
+            </header>
+            <div class="panel-body">
+              <p>This is <strong>Forge — Inventory Suite</strong>, Module 1 of 3 in the SaaS Service &amp; Inventory Suite I'm building. It's a working CRUD reference: every action persists to localStorage, every movement is logged, and the whole thing runs without a backend.</p>
+              <p class="muted">Looking for Bookings or Petty Cash modules? They're next on the roadmap. <a href="../../contact.html" target="_top">Get in touch</a> if you want a tailored version for your business.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- =================== MOBILE BOTTOM NAV =================== -->
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <button class="bottom-nav-item is-active" data-view="products">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>
+      <span>Inventory</span>
+    </button>
+    <button class="bottom-nav-item" data-view="dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+      <span>Home</span>
+    </button>
+    <button class="bottom-nav-item bottom-nav-fab" id="bottom-nav-fab" aria-label="Add product">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+    </button>
+    <button class="bottom-nav-item" data-view="transactions">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7H3"></path><path d="M21 12H3"></path><path d="M21 17H3"></path></svg>
+      <span>Logs</span>
+    </button>
+    <button class="bottom-nav-item" data-view="settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v6m0 6v10"></path></svg>
+      <span>More</span>
+    </button>
+  </nav>
+
+</div>
+
+<!-- =================== CMD+K PALETTE =================== -->
+<div class="cmdk-overlay" id="cmdk-overlay" hidden>
+  <div class="cmdk" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="cmdk-input-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+      <input type="text" id="cmdk-input" placeholder="Type a command or search products…" autocomplete="off">
+      <button class="cmdk-close" id="cmdk-close" aria-label="Close">Esc</button>
+    </div>
+    <div class="cmdk-results" id="cmdk-results" role="listbox"></div>
+    <div class="cmdk-footer">
+      <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> select</span>
+      <span><kbd>esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- =================== PRODUCT MODAL =================== -->
+<div class="modal-overlay" id="product-modal" hidden>
+  <div class="modal modal-md" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+    <header class="modal-header">
+      <h2 id="product-modal-title">Add product</h2>
+      <button class="icon-btn" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+    </header>
+    <form id="product-form" class="modal-form" novalidate>
+      <div class="form-grid">
+        <div class="form-field form-field-half">
+          <label for="prod-sku">SKU <span class="req">*</span></label>
+          <input type="text" id="prod-sku" required placeholder="e.g. SP-001" autocomplete="off">
+        </div>
+        <div class="form-field form-field-half">
+          <label for="prod-category">Category</label>
+          <input type="text" id="prod-category" placeholder="Brakes, Lubricants…" autocomplete="off" list="category-suggestions">
+          <datalist id="category-suggestions"></datalist>
+        </div>
+        <div class="form-field">
+          <label for="prod-name">Product name <span class="req">*</span></label>
+          <input type="text" id="prod-name" required placeholder="Brake pad set (front)" autocomplete="off">
+        </div>
+        <div class="form-field form-field-half">
+          <label for="prod-price">Sell price <span class="req">*</span></label>
+          <input type="number" id="prod-price" min="0" step="0.01" required placeholder="0.00">
+        </div>
+        <div class="form-field form-field-half">
+          <label for="prod-cost">Cost price</label>
+          <input type="number" id="prod-cost" min="0" step="0.01" placeholder="0.00">
+        </div>
+        <div class="form-field form-field-half">
+          <label for="prod-stock">Initial stock <span class="req">*</span></label>
+          <input type="number" id="prod-stock" min="0" step="1" value="0" required>
+        </div>
+        <div class="form-field form-field-half">
+          <label for="prod-threshold">Low-stock alert at</label>
+          <input type="number" id="prod-threshold" min="0" step="1" value="5">
+        </div>
+        <div class="form-field">
+          <label for="prod-supplier">Supplier <span class="muted">(optional)</span></label>
+          <input type="text" id="prod-supplier" placeholder="Acme Auto Parts" autocomplete="off">
+        </div>
+        <div class="form-field">
+          <label for="prod-notes">Notes <span class="muted">(optional)</span></label>
+          <textarea id="prod-notes" rows="2" placeholder="Internal notes about this product…"></textarea>
+        </div>
+      </div>
+      <footer class="modal-footer">
+        <button type="button" class="btn btn-ghost" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary" id="product-submit">Save product</button>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<!-- =================== STOCK ADJUST MODAL =================== -->
+<div class="modal-overlay" id="stock-modal" hidden>
+  <div class="modal modal-sm" role="dialog" aria-modal="true" aria-labelledby="stock-modal-title">
+    <header class="modal-header">
+      <h2 id="stock-modal-title">Adjust stock</h2>
+      <button class="icon-btn" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+    </header>
+    <form id="stock-form" class="modal-form" novalidate>
+      <div class="stock-summary" id="stock-summary"></div>
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Movement type</label>
+          <div class="seg-control" role="radiogroup">
+            <input type="radio" name="stock-type" id="stock-in" value="in" checked>
+            <label for="stock-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+              Stock IN
+            </label>
+            <input type="radio" name="stock-type" id="stock-out" value="out">
+            <label for="stock-out">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="m5 12 7-7 7 7"></path></svg>
+              Stock OUT
+            </label>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="stock-qty">Quantity <span class="req">*</span></label>
+          <input type="number" id="stock-qty" min="1" value="1" required>
+        </div>
+        <div class="form-field">
+          <label for="stock-note">Reason / note</label>
+          <input type="text" id="stock-note" placeholder="Restock from supplier, sale, damaged…" autocomplete="off">
+        </div>
+      </div>
+      <footer class="modal-footer">
+        <button type="button" class="btn btn-ghost" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary">Record movement</button>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<!-- =================== TRANSACTION HISTORY MODAL =================== -->
+<div class="modal-overlay" id="history-modal" hidden>
+  <div class="modal modal-md" role="dialog" aria-modal="true" aria-labelledby="history-modal-title">
+    <header class="modal-header">
+      <h2 id="history-modal-title">Transaction history</h2>
+      <button class="icon-btn" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+    </header>
+    <div class="modal-body" id="history-modal-body"></div>
+  </div>
+</div>
+
+<!-- =================== CONFIRM DIALOG =================== -->
+<div class="modal-overlay" id="confirm-modal" hidden>
+  <div class="modal modal-xs" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title">
+    <header class="modal-header">
+      <h2 id="confirm-title">Confirm</h2>
+    </header>
+    <div class="modal-body">
+      <p id="confirm-message"></p>
+    </div>
+    <footer class="modal-footer">
+      <button class="btn btn-ghost" data-modal-close>Cancel</button>
+      <button class="btn btn-danger" id="confirm-ok">Confirm</button>
+    </footer>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-container" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<!-- Watermark / portfolio link -->
+<a class="watermark" href="../../work.html" target="_top" title="Back to portfolio showcase">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+  Back to portfolio
+</a>
+
+<script src="js/app.js"></script>
+</body>
+</html>

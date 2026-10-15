@@ -1,0 +1,173 @@
+{
+  "_README": "Tools manifest. Each item appears as a card on /tools.html. Add/remove entries here. Categories are filterable on the page (dev, design, productivity, ai, files, learning).",
+
+  "_HOW_TO_ADD": [
+    "1) Add a new entry to items[] below.",
+    "2) Required: title, category, description, url. Optional: tags[], free (true/false), notes.",
+    "3) Save & refresh /tools.html — card appears.",
+    "4) Categories supported by the filter chips: dev | design | productivity | ai | files | learning. Pick the closest fit; use 'productivity' as a catch-all."
+  ],
+
+  "items": [
+    {
+      "title": "ChatGPT",
+      "category": "ai",
+      "url": "https://chat.openai.com",
+      "description": "Conversational AI assistant for writing, coding help, research, brainstorming, and quick explanations.",
+      "tags": ["AI", "Writing", "Coding"],
+      "free": true
+    },
+    {
+      "title": "Claude",
+      "category": "ai",
+      "url": "https://claude.ai",
+      "description": "Anthropic's AI assistant — strong at long-form writing, document analysis, and thoughtful coding help.",
+      "tags": ["AI", "Long-form", "Coding"],
+      "free": true
+    },
+    {
+      "title": "GitHub",
+      "category": "dev",
+      "url": "https://github.com",
+      "description": "Code hosting, version control, and collaboration. Free for public and private repositories.",
+      "tags": ["Git", "Collab", "CI/CD"],
+      "free": true
+    },
+    {
+      "title": "VS Code",
+      "category": "dev",
+      "url": "https://code.visualstudio.com",
+      "description": "Free, fast, extensible code editor. Great for everything from quick edits to full projects.",
+      "tags": ["Editor", "IDE", "Cross-platform"],
+      "free": true
+    },
+    {
+      "title": "Stack Overflow",
+      "category": "dev",
+      "url": "https://stackoverflow.com",
+      "description": "When something breaks, someone has probably already asked about it. Search before you ask.",
+      "tags": ["Q&A", "Debugging"],
+      "free": true
+    },
+    {
+      "title": "MDN Web Docs",
+      "category": "dev",
+      "url": "https://developer.mozilla.org",
+      "description": "The reference I trust for HTML, CSS, JavaScript, and web APIs. Clear examples, accurate detail.",
+      "tags": ["Reference", "HTML/CSS/JS"],
+      "free": true
+    },
+    {
+      "title": "CodePen",
+      "category": "dev",
+      "url": "https://codepen.io",
+      "description": "Quick online sandbox for HTML/CSS/JS prototypes and UI experiments.",
+      "tags": ["Sandbox", "Front-end"],
+      "free": true
+    },
+    {
+      "title": "Figma",
+      "category": "design",
+      "url": "https://figma.com",
+      "description": "Collaborative design tool for UI, prototypes, and design systems. Free tier covers most solo work.",
+      "tags": ["UI", "Prototyping", "Collab"],
+      "free": false
+    },
+    {
+      "title": "Canva",
+      "category": "design",
+      "url": "https://canva.com",
+      "description": "Beginner-friendly graphic design for posters, social posts, presentations, and quick branding mockups.",
+      "tags": ["Graphics", "Templates"],
+      "free": false
+    },
+    {
+      "title": "Coolors",
+      "category": "design",
+      "url": "https://coolors.co",
+      "description": "Generate color palettes in seconds. Press space to lock the colors you like and reroll the rest.",
+      "tags": ["Color", "Palettes"],
+      "free": true
+    },
+    {
+      "title": "Unsplash",
+      "category": "design",
+      "url": "https://unsplash.com",
+      "description": "Free, high-quality stock photos for projects, mockups, and websites. No attribution required.",
+      "tags": ["Photos", "Royalty-free"],
+      "free": true
+    },
+    {
+      "title": "Notion",
+      "category": "productivity",
+      "url": "https://notion.so",
+      "description": "Notes, tasks, docs, and lightweight databases in one workspace. Great for personal knowledge bases.",
+      "tags": ["Notes", "Wiki", "Tasks"],
+      "free": false
+    },
+    {
+      "title": "Trello",
+      "category": "productivity",
+      "url": "https://trello.com",
+      "description": "Simple Kanban boards for organizing personal projects, freelance work, or team tasks.",
+      "tags": ["Kanban", "Tasks"],
+      "free": false
+    },
+    {
+      "title": "Google Drive",
+      "category": "files",
+      "url": "https://drive.google.com",
+      "description": "Cloud storage with Docs, Sheets, and Slides built in. 15 GB free — enough for most personal use.",
+      "tags": ["Cloud", "Sync"],
+      "free": false
+    },
+    {
+      "title": "WeTransfer",
+      "category": "files",
+      "url": "https://wetransfer.com",
+      "description": "Send big files (up to 2 GB) to anyone with a link. No account needed.",
+      "tags": ["File transfer"],
+      "free": true
+    },
+    {
+      "title": "iLovePDF",
+      "category": "files",
+      "url": "https://ilovepdf.com",
+      "description": "Merge, split, compress, convert, and edit PDFs in your browser. Most operations are free.",
+      "tags": ["PDF", "Convert"],
+      "free": true
+    },
+    {
+      "title": "TinyPNG",
+      "category": "files",
+      "url": "https://tinypng.com",
+      "description": "Compress PNG and JPG images without visible quality loss. Big speed wins for websites.",
+      "tags": ["Image", "Compress"],
+      "free": true
+    },
+    {
+      "title": "freeCodeCamp",
+      "category": "learning",
+      "url": "https://freecodecamp.org",
+      "description": "Free, project-based courses from HTML/CSS basics through full-stack development and data analysis.",
+      "tags": ["Learn", "Curriculum", "Certificates"],
+      "free": true
+    },
+    {
+      "title": "The Odin Project",
+      "category": "learning",
+      "url": "https://theodinproject.com",
+      "description": "Free, opinionated full-stack curriculum that emphasizes building real projects from day one.",
+      "tags": ["Full-stack", "Curriculum"],
+      "free": true
+    },
+    {
+      "title": "YouTube",
+      "category": "learning",
+      "url": "https://youtube.com",
+      "description": "Endless free tutorials on basically every topic. Quality varies — pick channels with good reputations.",
+      "tags": ["Video", "Tutorials"],
+      "free": true
+    }
+  ]
+}

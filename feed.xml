@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  RSS feed for /writing.
+  Author: Chester Ewing Columna
+  After deploy, replace https://chesterewing.github.io with your real domain.
+  Add a new <item> here whenever you publish a post in /writing/posts/.
+-->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chester Ewing Columna — Writing</title>
+    <link>https://chesterewing.github.io/writing.html</link>
+    <description>Notes and short essays on backend development, building things, and the occasional opinion.</description>
+    <language>en-us</language>
+    <atom:link href="https://chesterewing.github.io/feed.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>From Data Encoder to Backend Dev — The Long Way Around</title>
+      <link>https://chesterewing.github.io/writing/posts/data-encoder-to-backend.html</link>
+      <guid>https://chesterewing.github.io/writing/posts/data-encoder-to-backend.html</guid>
+      <pubDate>Wed, 22 Apr 2026 09:00:00 +0800</pubDate>
+      <description>Five years from data entry to backend dev. What the slow path taught me.</description>
+    </item>
+
+    <item>
+      <title>What RxFY Taught Me About Shipping Real Software</title>
+      <link>https://chesterewing.github.io/writing/posts/rxfy-thesis-lessons.html</link>
+      <guid>https://chesterewing.github.io/writing/posts/rxfy-thesis-lessons.html</guid>
+      <pubDate>Sun, 08 Feb 2026 09:00:00 +0800</pubDate>
+      <description>Five lessons from a thesis project. Most were not about code.</description>
+    </item>
+
+    <item>
+      <title>Hardware Habits That Made Me a Better Software Engineer</title>
+      <link>https://chesterewing.github.io/writing/posts/hardware-habits-software.html</link>
+      <guid>https://chesterewing.github.io/writing/posts/hardware-habits-software.html</guid>
+      <pubDate>Tue, 30 Dec 2025 09:00:00 +0800</pubDate>
+      <description>Embedded mindset transferred to backend craft.</description>
+    </item>
+
+    <item>
+      <title>Hello, World — Why I Started This Site</title>
+      <link>https://chesterewing.github.io/writing/posts/hello-world.html</link>
+      <guid>https://chesterewing.github.io/writing/posts/hello-world.html</guid>
+      <pubDate>Wed, 12 Nov 2025 09:00:00 +0800</pubDate>
+      <description>Why I rebuilt my portfolio and what I want it to do.</description>
+    </item>
+  </channel>
+</rss>

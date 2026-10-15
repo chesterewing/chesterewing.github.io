@@ -1,0 +1,511 @@
+<!--
+  Forge — Expenses (Demo)
+  Module 3 of 3: Digital Petty Cash & Expense Tracker
+  Author: Chester Ewing Columna
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Forge — Expenses</title>
+  <meta name="description" content="Modern expense and petty cash tracker — categories, monthly summaries, and reports. Built by Chester Ewing Columna.">
+  <meta name="author" content="Chester Ewing Columna">
+  <meta name="theme-color" content="#10b981">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div class="boot-splash" id="boot-splash">
+  <div class="boot-spinner" aria-hidden="true"></div>
+  <div class="boot-text">Loading Forge Expenses…</div>
+</div>
+
+<div class="app" id="app" hidden>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+    <div class="sidebar-brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">Forge</div>
+        <div class="brand-sub">Expenses</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item is-active" data-view="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+        <span>Overview</span>
+      </button>
+      <button class="nav-item" data-view="expenses">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+        <span>Expenses</span>
+        <span class="nav-badge" id="nav-expense-count">0</span>
+      </button>
+      <button class="nav-item" data-view="categories">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h20"/><path d="M5 7v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7"/><path d="M9 4h6l1 3H8z"/></svg>
+        <span>Categories</span>
+        <span class="nav-badge" id="nav-category-count">0</span>
+      </button>
+      <button class="nav-item" data-view="reports">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+        <span>Reports</span>
+      </button>
+      <button class="nav-item" data-view="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v10"/></svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-tip">
+      <div class="sidebar-tip-title">Pro tip</div>
+      <div class="sidebar-tip-text">Press <kbd>Ctrl</kbd>+<kbd>K</kbd> for quick add or jump anywhere.</div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="btn btn-ghost btn-sm btn-block" id="reset-demo-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        Reset demo
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <!-- MAIN -->
+  <div class="main-column">
+    <header class="topbar">
+      <button class="icon-btn topbar-menu" id="sidebar-toggle" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+
+      <button class="cmdk-trigger" id="cmdk-trigger">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <span class="cmdk-trigger-label">Search expenses, jump to actions…</span>
+        <span class="cmdk-trigger-kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+      </button>
+
+      <div class="topbar-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <div class="user-chip" tabindex="0" role="button">
+          <div class="user-avatar">CC</div>
+          <div class="user-meta">
+            <div class="user-name">Chester</div>
+            <div class="user-role"><span class="user-role-dot"></span>Admin</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-body">
+
+      <!-- ============ DASHBOARD ============ -->
+      <section class="view is-active" data-view="dashboard">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1 class="page-title">Overview</h1>
+            <p class="page-sub" id="dashboard-period-sub">Tracking expenses for the current month.</p>
+          </div>
+          <div class="page-header-actions">
+            <div class="month-picker">
+              <button class="icon-btn" id="month-prev" aria-label="Previous month">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <span class="month-picker-label" id="month-picker-label">May 2026</span>
+              <button class="icon-btn" id="month-next" aria-label="Next month">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+            <button class="btn btn-primary" id="add-expense-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+              Add expense
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero card: total + delta -->
+        <article class="hero-card">
+          <div class="hero-card-left">
+            <div class="hero-card-label">Total spent</div>
+            <div class="hero-card-value" id="hero-total">₱0.00</div>
+            <div class="hero-card-delta" id="hero-delta"></div>
+          </div>
+          <div class="hero-card-right">
+            <div class="hero-mini">
+              <div class="hero-mini-label">Entries</div>
+              <div class="hero-mini-value" id="hero-entries">0</div>
+            </div>
+            <div class="hero-mini">
+              <div class="hero-mini-label">Avg/day</div>
+              <div class="hero-mini-value" id="hero-avg">₱0</div>
+            </div>
+            <div class="hero-mini">
+              <div class="hero-mini-label">Top category</div>
+              <div class="hero-mini-value hero-mini-value--small" id="hero-top">—</div>
+            </div>
+          </div>
+        </article>
+
+        <div class="dashboard-grid">
+          <article class="panel">
+            <header class="panel-header">
+              <h2 class="panel-title">Spending by category</h2>
+              <button class="link-btn" data-view-jump="categories">Manage →</button>
+            </header>
+            <div class="panel-body" id="category-breakdown"></div>
+          </article>
+
+          <article class="panel">
+            <header class="panel-header">
+              <h2 class="panel-title">Recent expenses</h2>
+              <button class="link-btn" data-view-jump="expenses">View all →</button>
+            </header>
+            <div class="panel-body panel-body--flush" id="recent-expenses"></div>
+          </article>
+        </div>
+
+        <article class="panel">
+          <header class="panel-header">
+            <h2 class="panel-title">Last 6 months</h2>
+          </header>
+          <div class="panel-body" id="trend-chart"></div>
+        </article>
+      </section>
+
+      <!-- ============ EXPENSES ============ -->
+      <section class="view" data-view="expenses" hidden>
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1 class="page-title">Expenses</h1>
+            <p class="page-sub">Every transaction. Search, filter, export.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-secondary" id="export-csv-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export CSV
+            </button>
+            <button class="btn btn-primary" id="add-expense-btn-2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+              Add expense
+            </button>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="search-field">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="search" id="expense-search" placeholder="Search payee, description, notes…" autocomplete="off">
+          </div>
+          <select class="filter-select" id="filter-category">
+            <option value="">All categories</option>
+          </select>
+          <select class="filter-select" id="filter-payment">
+            <option value="">All methods</option>
+            <option value="cash">Cash</option>
+            <option value="card">Card</option>
+            <option value="gcash">GCash</option>
+            <option value="transfer">Bank transfer</option>
+          </select>
+          <select class="filter-select" id="filter-range">
+            <option value="month">This month</option>
+            <option value="last-month">Last month</option>
+            <option value="ytd">Year to date</option>
+            <option value="all">All time</option>
+          </select>
+        </div>
+
+        <div class="panel">
+          <div class="panel-body panel-body--flush" id="expenses-list"></div>
+        </div>
+
+        <div class="list-footer" id="expenses-footer"></div>
+      </section>
+
+      <!-- ============ CATEGORIES ============ -->
+      <section class="view" data-view="categories" hidden>
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1 class="page-title">Categories</h1>
+            <p class="page-sub">Group expenses and optionally set monthly budgets.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-primary" id="add-category-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+              Add category
+            </button>
+          </div>
+        </div>
+        <div id="categories-container"></div>
+      </section>
+
+      <!-- ============ REPORTS ============ -->
+      <section class="view" data-view="reports" hidden>
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1 class="page-title">Reports</h1>
+            <p class="page-sub">Compare months, drill into categories, export totals.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-secondary" id="export-report-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export report
+            </button>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="report-stats"></div>
+
+        <article class="panel">
+          <header class="panel-header">
+            <h2 class="panel-title">Monthly breakdown — last 6 months</h2>
+          </header>
+          <div class="panel-body" id="report-table"></div>
+        </article>
+      </section>
+
+      <!-- ============ SETTINGS ============ -->
+      <section class="view" data-view="settings" hidden>
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1 class="page-title">Settings</h1>
+            <p class="page-sub">Configure workspace, data, and appearance.</p>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <article class="panel">
+            <header class="panel-header"><h2 class="panel-title">Workspace</h2></header>
+            <div class="panel-body">
+              <div class="form-field">
+                <label for="setting-biz-name">Team / business name</label>
+                <input type="text" id="setting-biz-name" placeholder="My Team">
+              </div>
+              <div class="form-field">
+                <label for="setting-currency">Currency symbol</label>
+                <input type="text" id="setting-currency" maxlength="3" placeholder="₱">
+              </div>
+              <button class="btn btn-primary" id="settings-save-btn">Save settings</button>
+            </div>
+          </article>
+
+          <article class="panel">
+            <header class="panel-header"><h2 class="panel-title">Appearance</h2></header>
+            <div class="panel-body">
+              <div class="theme-picker">
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="light">
+                  <span class="theme-swatch theme-swatch--light"></span>
+                  <span>Light</span>
+                </label>
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="dark">
+                  <span class="theme-swatch theme-swatch--dark"></span>
+                  <span>Dark</span>
+                </label>
+                <label class="theme-option">
+                  <input type="radio" name="theme" value="auto">
+                  <span class="theme-swatch theme-swatch--auto"></span>
+                  <span>System</span>
+                </label>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <header class="panel-header"><h2 class="panel-title">Data</h2></header>
+            <div class="panel-body">
+              <p class="muted">All data lives in this browser's localStorage. Back up if you switch devices.</p>
+              <div class="stack-row">
+                <button class="btn btn-secondary" id="export-all-btn">Export all (JSON)</button>
+                <button class="btn btn-secondary" id="import-all-btn">Import JSON
+                  <input type="file" id="import-all-file" accept=".json,application/json" hidden>
+                </button>
+                <button class="btn btn-danger" id="wipe-all-btn">Wipe everything</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <header class="panel-header"><h2 class="panel-title">About</h2></header>
+            <div class="panel-body">
+              <p><strong>Forge — Expenses</strong> is Module 3 of 3 in the SaaS Service Suite. Pair with <strong>Forge Inventory</strong> and <strong>Forge Bookings</strong> for an end-to-end ops platform.</p>
+              <p class="muted">Need image/receipt uploads, multi-user roles, or cloud sync? <a href="../../contact.html" target="_top">Talk to me</a> — these need a backend.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="bottom-nav-item is-active" data-view="dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+      <span>Overview</span>
+    </button>
+    <button class="bottom-nav-item" data-view="expenses">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/></svg>
+      <span>Expenses</span>
+    </button>
+    <button class="bottom-nav-item bottom-nav-fab" id="bottom-nav-fab" aria-label="Add expense">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+    </button>
+    <button class="bottom-nav-item" data-view="categories">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h20"/><path d="M5 7v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7"/></svg>
+      <span>Categories</span>
+    </button>
+    <button class="bottom-nav-item" data-view="reports">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      <span>Reports</span>
+    </button>
+  </nav>
+</div>
+
+<!-- EXPENSE MODAL -->
+<div class="modal-overlay" id="expense-modal" hidden>
+  <div class="modal modal-md" role="dialog" aria-modal="true" aria-labelledby="expense-modal-title">
+    <header class="modal-header">
+      <h2 id="expense-modal-title">Add expense</h2>
+      <button class="icon-btn" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </header>
+    <form id="expense-form" class="modal-form" novalidate>
+      <div class="form-grid">
+        <div class="form-field form-field-half">
+          <label for="ex-date">Date <span class="req">*</span></label>
+          <input type="date" id="ex-date" required>
+        </div>
+        <div class="form-field form-field-half">
+          <label for="ex-amount">Amount <span class="req">*</span></label>
+          <input type="number" id="ex-amount" min="0" step="0.01" required placeholder="0.00">
+        </div>
+        <div class="form-field">
+          <label for="ex-category">Category <span class="req">*</span></label>
+          <select id="ex-category" required>
+            <option value="">Select a category…</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="ex-payee">Payee / merchant</label>
+          <input type="text" id="ex-payee" placeholder="Where did the money go?" autocomplete="off">
+        </div>
+        <div class="form-field form-field-half">
+          <label for="ex-payment">Payment method</label>
+          <select id="ex-payment">
+            <option value="cash">Cash</option>
+            <option value="card">Card</option>
+            <option value="gcash">GCash</option>
+            <option value="transfer">Bank transfer</option>
+          </select>
+        </div>
+        <div class="form-field form-field-half">
+          <label for="ex-ref">Reference no.</label>
+          <input type="text" id="ex-ref" placeholder="OR / TXN / receipt no.">
+        </div>
+        <div class="form-field">
+          <label for="ex-description">Description</label>
+          <input type="text" id="ex-description" placeholder="What was it for?">
+        </div>
+        <div class="form-field">
+          <label for="ex-receipt">Receipt note</label>
+          <textarea id="ex-receipt" rows="2" placeholder="Photo upload would need a backend — for now, paste a link or note details."></textarea>
+        </div>
+      </div>
+      <footer class="modal-footer">
+        <button type="button" class="btn btn-ghost" data-modal-close>Cancel</button>
+        <button type="button" class="btn btn-danger" id="expense-delete-btn" hidden>Delete</button>
+        <button type="submit" class="btn btn-primary" id="expense-submit">Save expense</button>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<!-- CATEGORY MODAL -->
+<div class="modal-overlay" id="category-modal" hidden>
+  <div class="modal modal-sm" role="dialog" aria-modal="true">
+    <header class="modal-header">
+      <h2 id="category-modal-title">Add category</h2>
+      <button class="icon-btn" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </header>
+    <form id="category-form" class="modal-form" novalidate>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="cat-name">Category name <span class="req">*</span></label>
+          <input type="text" id="cat-name" required placeholder="Gas, Food, Supplies…">
+        </div>
+        <div class="form-field">
+          <label for="cat-budget">Monthly budget <span class="muted">(optional)</span></label>
+          <input type="number" id="cat-budget" min="0" step="0.01" placeholder="0.00">
+        </div>
+        <div class="form-field">
+          <label>Color tag</label>
+          <div class="color-picker" id="cat-color-picker">
+            <button type="button" class="color-swatch" data-color="#10b981" style="background:#10b981" aria-label="Emerald"></button>
+            <button type="button" class="color-swatch" data-color="#3b82f6" style="background:#3b82f6" aria-label="Blue"></button>
+            <button type="button" class="color-swatch" data-color="#8b5cf6" style="background:#8b5cf6" aria-label="Violet"></button>
+            <button type="button" class="color-swatch" data-color="#ec4899" style="background:#ec4899" aria-label="Pink"></button>
+            <button type="button" class="color-swatch" data-color="#f59e0b" style="background:#f59e0b" aria-label="Amber"></button>
+            <button type="button" class="color-swatch" data-color="#ef4444" style="background:#ef4444" aria-label="Red"></button>
+            <button type="button" class="color-swatch" data-color="#06b6d4" style="background:#06b6d4" aria-label="Cyan"></button>
+            <button type="button" class="color-swatch" data-color="#84cc16" style="background:#84cc16" aria-label="Lime"></button>
+          </div>
+        </div>
+      </div>
+      <footer class="modal-footer">
+        <button type="button" class="btn btn-ghost" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary" id="category-submit">Save category</button>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<!-- CONFIRM -->
+<div class="modal-overlay" id="confirm-modal" hidden>
+  <div class="modal modal-xs" role="alertdialog" aria-modal="true">
+    <header class="modal-header"><h2 id="confirm-title">Confirm</h2></header>
+    <div class="modal-body"><p id="confirm-message"></p></div>
+    <footer class="modal-footer">
+      <button class="btn btn-ghost" data-modal-close>Cancel</button>
+      <button class="btn btn-danger" id="confirm-ok">Confirm</button>
+    </footer>
+  </div>
+</div>
+
+<!-- CMD+K -->
+<div class="cmdk-overlay" id="cmdk-overlay" hidden>
+  <div class="cmdk" role="dialog" aria-modal="true">
+    <div class="cmdk-input-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="cmdk-input" placeholder="Search expenses or jump to actions…" autocomplete="off">
+      <button class="cmdk-close" id="cmdk-close" aria-label="Close">Esc</button>
+    </div>
+    <div class="cmdk-results" id="cmdk-results" role="listbox"></div>
+    <div class="cmdk-footer">
+      <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> select</span>
+      <span><kbd>esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toasts" aria-live="polite"></div>
+
+<a class="watermark" href="../../work.html" target="_top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+  Back to portfolio
+</a>
+
+<script src="js/app.js"></script>
+</body>
+</html>

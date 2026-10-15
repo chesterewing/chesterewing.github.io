@@ -1,0 +1,37 @@
+{
+  "_README": "Testimonials manifest. Each item appears as a card on /testimonials.html. The entries below are PLACEHOLDER SAMPLES showcasing the layout — replace the quote/name/role fields with real testimonials as people send them, or delete and add your own.",
+
+  "_HOW_TO_ADD": [
+    "Required fields: quote, name.",
+    "Optional fields: role (their job title), company, avatar (image path or initials shown on a colored circle), rating (1-5).",
+    "Save & refresh /testimonials.html — card appears.",
+    "Tip: replace these sample entries with real ones once clients send them. Keep them honest — a real 4-star review beats a fake 5-star one every time."
+  ],
+
+  "items": [
+    {
+      "_sample": true,
+      "quote": "Chester delivered exactly what we briefed and a few things we hadn't thought to ask for. The backend has been stable since launch and his handover documentation made it easy for our internal team to pick up maintenance later.",
+      "name": "R*** M***",
+      "role": "Operations Lead",
+      "company": "Private client",
+      "rating": 5
+    },
+    {
+      "_sample": true,
+      "quote": "Worked with Chester on a small landing-page rebuild. Communication was direct and timely — clear progress every few days, no surprises. The site loads fast and looks better on mobile than the version it replaced.",
+      "name": "J*** C***",
+      "role": "Owner",
+      "company": "Private client",
+      "rating": 5
+    },
+    {
+      "_sample": true,
+      "quote": "Detail-oriented and dependable. Took time to understand our actual data problems before proposing a solution, instead of just throwing tools at it. The reports he built saved my team a couple of hours a week.",
+      "name": "A*** D***",
+      "role": "Department Head",
+      "company": "Private client",
+      "rating": 4
+    }
+  ]
+}

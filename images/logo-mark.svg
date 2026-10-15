@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Brand mark — Chester Ewing Columna
+  A "C" arc with an accent node sitting in its opening: the initial, plus a
+  connection point, which is what backend work actually is. No gradient.
+
+  Self-contained (own background) so it reads correctly as a favicon against
+  any browser chrome, light or dark. The header uses an inline variant that
+  swaps the arc to currentColor so it follows the page theme.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Chester Ewing Columna">
+  <rect width="32" height="32" rx="8" fill="#0b0e10"/>
+  <path d="M20.5 10.64A7 7 0 1 0 20.5 21.36"
+        fill="none" stroke="#e6edf3" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="24.2" cy="16" r="2.3" fill="#2dd4bf"/>
+</svg>

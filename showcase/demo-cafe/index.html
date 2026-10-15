@@ -1,0 +1,66 @@
+<!--
+  Demo: Cafe Landing Page
+  Author: Chester Ewing Columna
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Brew & Bean — Cafe Landing Page Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Chester Ewing Columna">
+  <link href="../../css/fonts.css" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Poppins", Arial, sans-serif; color: #2b2117; background: #fff7ee; line-height: 1.6; }
+    .hero { min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 60px 24px; background: linear-gradient(135deg, #2b1d12 0%, #6b3f1f 100%); color: #fff7ee; }
+    .hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .hero p { font-size: 18px; max-width: 540px; margin: 0 auto 28px; opacity: 0.9; }
+    .btn { display: inline-block; padding: 12px 28px; background: #f0d97c; color: #2b1d12; text-decoration: none; border-radius: 4px; font-weight: 600; }
+    .btn:hover { background: #e6c95f; }
+    section { padding: 70px 24px; max-width: 1100px; margin: 0 auto; }
+    h2 { font-size: 32px; margin-bottom: 24px; text-align: center; }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .menu-item { padding: 22px; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+    .menu-item h3 { font-size: 18px; margin-bottom: 6px; }
+    .menu-item .price { color: #6b3f1f; font-weight: 600; }
+    .info { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; text-align: center; }
+    .info div h3 { margin-bottom: 6px; font-size: 16px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b3f1f; }
+    footer { padding: 30px; text-align: center; color: #6b3f1f; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div>
+      <h1>Brew &amp; Bean</h1>
+      <p>Locally-roasted coffee, hand-pulled mornings, and a corner spot for slow afternoons.</p>
+      <a href="tel:+639750000000" class="btn">Call to Reserve</a>
+    </div>
+  </div>
+
+  <section>
+    <h2>Today's Menu</h2>
+    <div class="menu-grid">
+      <div class="menu-item"><h3>Espresso</h3><p>Single shot, smooth crema.</p><p class="price">₱90</p></div>
+      <div class="menu-item"><h3>Flat White</h3><p>Velvety microfoam over a double shot.</p><p class="price">₱140</p></div>
+      <div class="menu-item"><h3>Cold Brew</h3><p>Steeped 16 hours, low acidity.</p><p class="price">₱150</p></div>
+      <div class="menu-item"><h3>Pour Over</h3><p>Single-origin, brewed to order.</p><p class="price">₱160</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Visit Us</h2>
+    <div class="info">
+      <div><h3>Hours</h3><p>Mon–Sat · 7am — 9pm</p></div>
+      <div><h3>Address</h3><p>General Luna St., Aparri</p></div>
+      <div><h3>Phone</h3><p>+63 975 000 0000</p></div>
+    </div>
+  </section>
+
+  <footer>
+    Demo by Chester Ewing Columna · ce.columna404@gmail.com
+  </footer>
+
+  <script src="../../js/protect.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "_README": "Edit when your booking situation changes. The 'Availability' meter on /services reads from here. The next-available date is computed automatically as today + lead_days, so it never goes stale — just set lead_days.",
+  "slots_booked": 1,
+  "slots_total": 3,
+  "lead_days": 7,
+  "status_message": "Booking 2-3 projects per month. Currently taking on a new client."
+}
