@@ -384,18 +384,12 @@
     </div>
   </section>
 
-  <!-- ===== GitHub activity =====
-       Set data-user to a GitHub username to switch this on. While it is empty
-       the whole section removes itself, so a visitor never sees setup text. -->
-  <section class="section section--inset" data-gh-section>
-    <div class="container">
-      <div class="section-head">
-        <p class="kicker">Open source</p>
-        <h2 class="mt-3">Recent activity</h2>
-      </div>
-      <div class="card reveal" id="gh-graph" data-user="chesterewing"></div>
-    </div>
-  </section>
+  <!-- A GitHub contribution graph used to sit here. Removed on purpose: most
+       of Chester's work is on private/work repos (RocketServe) and the thesis,
+       so the public graph read as near-empty and undersold the actual output.
+       To bring it back once public activity picks up, restore a section with
+       <div id="gh-graph" data-user="chesterewing"></div> inside a
+       [data-gh-section] wrapper — initGithub() in app.js still supports it. -->
 
   <!-- ===== Tools I use ===== -->
   <section class="section" id="uses">
