@@ -1083,7 +1083,21 @@ blockquote {
   white-space: pre;
   font-variant-numeric: tabular-nums;
 }
-.code-main { padding: var(--sp-4) var(--sp-4) var(--sp-4) var(--sp-3); overflow-x: auto; }
+.code-main { padding: var(--sp-4) var(--sp-4) var(--sp-4) var(--sp-3); overflow-x: auto; min-width: 0; }
+
+/* Grid/flex overflow guard — THE classic trap.
+   A grid or flex item defaults to a minimum size of its content (min-width:
+   auto). The code editor holds a <pre white-space:pre> that never wraps, so on
+   a phone its intrinsic width forced the whole hero column wider than the
+   screen and clipped everything to the right. Letting these items shrink below
+   their content width lets the inner overflow-x:auto do its job instead. */
+.hero__grid > *,
+.with-aside > *,
+.code-area { min-width: 0; }
+
+/* Last-resort backstop: never let the page itself scroll sideways. If some
+   future element overflows, it is contained rather than shifting the layout. */
+html, body { overflow-x: clip; }
 
 /* Inside a code surface the tokens use the editor palette */
 .code-surface .tok-key  { color: var(--code-kw); }
@@ -1161,6 +1175,7 @@ blockquote {
 .term__body {
   height: 23rem;
   overflow-y: auto;
+  overflow-x: auto;
   padding: var(--sp-5);
   font-family: var(--font-mono);
   font-size: 0.8125rem;
