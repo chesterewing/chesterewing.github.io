@@ -1809,3 +1809,18 @@ main { counter-reset: sect; }
   .term__form { font-size: 16px; }
 }
 
+
+/* ===== 10. Justified long-form text, wide screens only =================== */
+/* Justify reads cleanly when the column is wide enough that hyphenation can
+   even out the spacing; on a narrow phone column it opens ugly gaps. So the
+   reading areas justify from tablet up and stay left-aligned on phones.
+   Headings, cards, labels and the hero are never justified. */
+@media (min-width: 700px) {
+  .article p,
+  .prose p,
+  .cec-cs-section p {
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+}
