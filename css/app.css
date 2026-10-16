@@ -1809,16 +1809,3 @@ main { counter-reset: sect; }
   .term__form { font-size: 16px; }
 }
 
-/* ===== 10. Justified long-form text (by request) ========================= */
-/* Applied only to reading areas — blog posts, the About story, case-study
-   prose. Paired with automatic hyphenation so the uneven word-spacing that
-   normally makes justified web text hard to read is kept in check. Cards,
-   labels, the hero and short strings stay left-aligned, where justify would
-   look worse. */
-.article p,
-.prose p,
-.cec-cs-section p {
-  text-align: justify;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-}
