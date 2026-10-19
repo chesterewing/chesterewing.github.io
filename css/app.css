@@ -18,7 +18,7 @@
 
    Rules this file follows, so it stays coherent as it grows:
      - No gradients. Depth comes from one border and one soft shadow.
-     - One accent colour (teal). Everything else is a neutral.
+     - One accent color (teal). Everything else is a neutral.
      - Spacing and type come from the scales below, never ad-hoc px.
    ========================================================================== */
 
@@ -1007,7 +1007,7 @@ blockquote {
    code blocks. It is NOT applied site-wide.
 
    This is the one place the single-accent rule is suspended on purpose —
-   real syntax colour is what makes code read as code. Everything outside a
+   real syntax color is what makes code read as code. Everything outside a
    .code-surface stays monochrome plus teal. */
 
 .code-surface {

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Chester Ewing Columna — portfolio behaviour
+   Chester Ewing Columna — portfolio behavior
    Author: Chester Ewing Columna
 
    Replaces: jquery.min.js, bootstrap.min.js, owl.carousel.min.js,
