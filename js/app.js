@@ -670,7 +670,7 @@
         .then(({ ok }) => {
           if (!ok) throw new Error('rejected');
           form.reset();
-          say('Thanks — your message is on its way. I usually reply within a day.', 'ok');
+          say('Thanks, your message is on its way. I usually reply within a day.', 'ok');
         })
         .catch(() => {
           say('That did not go through. Email me directly at ce.columna404@gmail.com and I will pick it up.', 'err');
@@ -946,7 +946,7 @@
             'at Cebuanas Encoding Services.',
             '',
             'Computer Engineering background, which means I ask what things',
-            'cost — in memory, in queries, and at 3am when something fails.',
+            'cost: in memory, in queries, and at 3am when something fails.',
           ]);
         },
       },
@@ -970,7 +970,7 @@
           print('reading projects/index.json …', 'out');
           json('projects/index.json').then((d) => {
             projectCache = (d.items || []).flatMap((p) => ([
-              `${p.title}  [${p.status || 'n/a'}, ${p.year || '—'}]`,
+              `${p.title}  [${p.status || 'n/a'}, ${p.year || '?'}]`,
               `  ${p.subtitle || ''}`,
               `  → /projects/${p.slug}.html`,
               '',
@@ -1061,12 +1061,12 @@
         desc: '', hidden: true,
         run(args) {
           if (args.join(' ').includes('-rf')) {
-            print('Nice try. This one is static — there is nothing to delete. 🙂', 'ok');
+            print('Nice try. This one is static; there is nothing to delete. 🙂', 'ok');
           } else print('rm: missing operand', 'err');
         },
       },
       exit: { desc: '', hidden: true, run() { print('There is no exit. Only more backlog. 🪄'); } },
-      vim:  { desc: '', hidden: true, run() { print("You're trapped. Type :q! — just kidding, press Enter. 😄"); } },
+      vim:  { desc: '', hidden: true, run() { print("You're trapped. Type could be worse, just kidding, press Enter. 😄"); } },
       coffee: { desc: '', hidden: true, run() { print('☕ brewing… this is what keeps the API responding.'); } },
     };
 
@@ -1123,7 +1123,7 @@
     const ascii = $('#term-ascii', root);
     if (ascii) ascii.textContent = BANNER.join('\n');
 
-    print('Chester Ewing Columna — Backend Developer', 'out');
+    print('Chester Ewing Columna · Backend Developer', 'out');
     print('Aparri, Cagayan Valley, PH · Asia/Manila', 'out');
     print('');
     print("Type 'help' to list commands. Tab completes, ↑ recalls.", 'ok');
@@ -1141,7 +1141,7 @@
       { label: 'About',     kind: 'page', href: base + 'about.html' },
       { label: 'Writing',   kind: 'page', href: base + 'writing.html' },
       { label: 'Hire me',   kind: 'page', href: base + 'contact.html' },
-      { label: 'RxFY — Antibiotic Monitoring System', kind: 'project', href: base + 'projects/rxfy.html' },
+      { label: 'RxFY · Antibiotic Monitoring System', kind: 'project', href: base + 'projects/rxfy.html' },
       { label: 'Personal Portfolio',                  kind: 'project', href: base + 'projects/portfolio.html' },
       { label: 'Download résumé (PDF)', kind: 'action', href: base + 'assets/chester_ewing_columna_resume.pdf' },
       { label: 'Email Chester',         kind: 'action', href: 'mailto:ce.columna404@gmail.com' },
@@ -1300,7 +1300,7 @@
     const routeFor = (p) => API_ROUTES.find((r) => r.path === p) || { path: p };
 
     select.replaceChildren(...API_ROUTES.map((r) =>
-      el('option', { value: r.path, text: `${r.method || 'GET'} ${r.path}  —  ${r.label}` })));
+      el('option', { value: r.path, text: `${r.method || 'GET'} ${r.path}  ·  ${r.label}` })));
 
     const swReady = () =>
       'serviceWorker' in navigator && navigator.serviceWorker.controller != null;
@@ -1348,7 +1348,7 @@
       if (route.auth) {
         lines += authToken
           ? `Authorization: Bearer ${authToken.slice(0, 20)}…\n`
-          : 'Authorization: (none yet — run POST /api/login first)\n';
+          : 'Authorization: (none yet, run POST /api/login first)\n';
       }
       if (route.body) {
         lines += `Content-Type: application/json\n\n${JSON.stringify(route.body)}\n`;

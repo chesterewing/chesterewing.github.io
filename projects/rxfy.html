@@ -1,12 +1,12 @@
 <!--
   Author: Chester Ewing Columna
-  Project: RxFY — Antibiotic Monitoring System (Computer Engineering Thesis)
+  Project: RxFY · Antibiotic Monitoring System (Computer Engineering Thesis)
 -->
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>RxFY — Antibiotic Monitoring System | Chester Ewing Columna</title>
+	<title>RxFY · Antibiotic Monitoring System | Chester Ewing Columna</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Case study of RxFY, a real-time antibiotic monitoring system built as my Computer Engineering thesis. Architecture, decisions, and lessons learned.">
 	<meta name="author" content="Chester Ewing Columna">
@@ -15,7 +15,7 @@
 	<meta property="og:image" content="https://chesterewing.github.io/images/og/work.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Chester Ewing Columna — Backend Developer">
+<meta property="og:image:alt" content="Chester Ewing Columna · Backend Developer">
 	<meta name="twitter:card" content="summary_large_image">
 
 	<link rel="canonical" href="https://chesterewing.github.io/projects/rxfy.html">
@@ -40,7 +40,7 @@
 
 <header class="header">
   <div class="container">
-    <a class="brand" href="../index.html" aria-label="Chester Ewing Columna — home">
+    <a class="brand" href="../index.html" aria-label="Chester Ewing Columna · home">
       <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <rect x="1.25" y="1.25" width="29.5" height="29.5" rx="8" stroke="currentColor" stroke-opacity=".18" stroke-width="1.5"/>
         <path d="M20.5 10.64A7 7 0 1 0 20.5 21.36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
@@ -58,7 +58,7 @@
     </nav>
 
     <div class="header-actions">
-      <button class="theme-toggle" data-cmdk type="button" aria-label="Search — Ctrl+K" title="Search — Ctrl+K">
+      <button class="theme-toggle" data-cmdk type="button" aria-label="Search · Ctrl+K" title="Search · Ctrl+K">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
         </svg>
@@ -98,7 +98,7 @@
 					<span class="cec-cs-year">2023–2024</span>
 					<span class="cec-cs-cat">Thesis · Healthcare</span>
 				</div>
-				<h1 class="cec-cs-title">RxFY — Antibiotic Monitoring System</h1>
+				<h1 class="cec-cs-title">RxFY · Antibiotic Monitoring System</h1>
 				<p class="cec-cs-subtitle">Real-time monitoring &amp; notification platform that helps drug stores track antibiotic purchases and flag suspicious patterns automatically.</p>
 				<div class="cec-cs-hero-img" style="background-image: url('../images/work-1.jpg');"></div>
 			</section>
@@ -114,7 +114,7 @@
 			<!-- Problem -->
 			<section class="cec-cs-section">
 				<h2>The Problem</h2>
-				<p>Drug stores in our area didn't have a fast way to spot suspicious antibiotic-buying patterns. High volumes from a single buyer, repeat purchases inside narrow time windows, off-prescription dispensing — all the things that suggest stockpiling or misuse — were buried in paper logs nobody had time to review.</p>
+				<p>Drug stores in our area didn't have a fast way to spot suspicious antibiotic-buying patterns. High volumes from a single buyer, repeat purchases inside narrow time windows, off-prescription dispensing (all the things that suggest stockpiling or misuse) were buried in paper logs nobody had time to review.</p>
 				<p>Antibiotic misuse drives resistance. The slow loop between "purchase happens" and "pharmacist notices the pattern" made the problem worse. We wanted to close that loop down to seconds.</p>
 			</section>
 
@@ -125,7 +125,7 @@
 					<li>Real-time logging of every antibiotic purchase</li>
 					<li>Automatic alerts when patterns cross configurable thresholds</li>
 					<li>Audit trail satisfying public-health compliance requirements</li>
-					<li>Web-based — runs on whatever device the pharmacist already has</li>
+					<li>Web-based: runs on whatever device the pharmacist already has</li>
 					<li>Simple enough for non-technical staff to operate daily</li>
 				</ul>
 			</section>
@@ -227,14 +227,14 @@
 					<li><strong>The bug isn't always in the code.</strong> Spent two days chasing phantom alerts that turned out to be a 40-minute clock drift on the test machine.</li>
 					<li><strong>Real users break things in unimagined ways.</strong> Sample data hid the messy-input problem entirely. Pilot data exposed it day one.</li>
 					<li><strong>Documentation is the project.</strong> Once we started writing things down, onboarding teammates went from "spend 2 hours guessing" to "read the README."</li>
-					<li><strong>Ship the smaller version.</strong> SMS notifications, ML anomaly detection, multi-store admin dashboard — all cut. Each cut was correct.</li>
+					<li><strong>Ship the smaller version.</strong> SMS notifications, ML anomaly detection, multi-store admin dashboard: all cut. Each cut was correct.</li>
 				</ul>
 			</section>
 
 			<!-- Outcome -->
 			<section class="cec-cs-section">
 				<h2>Outcome</h2>
-				<p>Defended successfully in 2024. Two pilot drug stores ran the system through their normal workflow and the alert engine caught patterns that would have been invisible in paper logs. The system isn't currently deployed beyond the pilot — but the engineering lessons it taught me still shape how I approach every backend project today, including the one I'm now building at Cebuanas.</p>
+				<p>Defended successfully in 2024. Two pilot drug stores ran the system through their normal workflow and the alert engine caught patterns that would have been invisible in paper logs. The system isn't currently deployed beyond the pilot, but the engineering lessons it taught me still shape how I approach every backend project today, including the one I'm now building at Cebuanas.</p>
 				<p>This was the project that turned "I want to build software" into "I can build software."</p>
 			</section>
 

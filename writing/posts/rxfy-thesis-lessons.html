@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<title>What RxFY Taught Me | Chester Ewing Columna</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Lessons from building a real-time antibiotic monitoring system as a thesis project — most of them not about code.">
+	<meta name="description" content="Lessons from building a real-time antibiotic monitoring system as a thesis project. Most of them not about code.">
 	<meta name="author" content="Chester Ewing Columna">
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="What RxFY Taught Me | Chester Ewing Columna">
@@ -16,9 +16,9 @@
 	<meta property="og:image" content="https://chesterewing.github.io/images/og/writing.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Chester Ewing Columna — Backend Developer">
+<meta property="og:image:alt" content="Chester Ewing Columna · Backend Developer">
 	<meta property="og:site_name" content="Chester Ewing Columna Portfolio">
-	<meta property="og:description" content="Lessons from building a real-time antibiotic monitoring system as a thesis project — most of them not about code.">
+	<meta property="og:description" content="Lessons from building a real-time antibiotic monitoring system as a thesis project. Most of them not about code.">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="What RxFY Taught Me | Chester Ewing Columna">
 	<meta name="twitter:image" content="https://chesterewing.github.io/images/og/writing.png">
@@ -46,7 +46,7 @@
 
 <header class="header">
   <div class="container">
-    <a class="brand" href="../../index.html" aria-label="Chester Ewing Columna — home">
+    <a class="brand" href="../../index.html" aria-label="Chester Ewing Columna · home">
       <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <rect x="1.25" y="1.25" width="29.5" height="29.5" rx="8" stroke="currentColor" stroke-opacity=".18" stroke-width="1.5"/>
         <path d="M20.5 10.64A7 7 0 1 0 20.5 21.36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
@@ -64,7 +64,7 @@
     </nav>
 
     <div class="header-actions">
-      <button class="theme-toggle" data-cmdk type="button" aria-label="Search — Ctrl+K" title="Search — Ctrl+K">
+      <button class="theme-toggle" data-cmdk type="button" aria-label="Search · Ctrl+K" title="Search · Ctrl+K">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
         </svg>
@@ -95,12 +95,12 @@
 			<h1>What RxFY Taught Me About Shipping Real Software</h1>
 			<div class="post-meta">February 8, 2026 · 6 min read · thesis · rxfy · lessons</div>
 
-			<p>RxFY was my thesis: a web-based monitoring and notification system for antibiotic purchases. The pitch was that drug stores in the area didn't have a fast way to spot suspicious buying patterns — high volumes from a single buyer, repeat purchases inside narrow windows, the kind of thing that suggests stockpiling or off-prescription use. We built a tool that watched the sales feed and pinged when something looked off.</p>
+			<p>RxFY was my thesis: a web-based monitoring and notification system for antibiotic purchases. The pitch was that drug stores in the area didn't have a fast way to spot suspicious buying patterns: high volumes from a single buyer, repeat purchases inside narrow windows, the kind of thing that suggests stockpiling or off-prescription use. We built a tool that watched the sales feed and pinged when something looked off.</p>
 
-			<p>The grade went well. The system worked. But the thing I actually took away from it — the thing that still shapes how I write code today — wasn't on the rubric.</p>
+			<p>The grade went well. The system worked. But the thing I actually took away from it, the thing that still shapes how I write code today, wasn't on the rubric.</p>
 
 			<h2>1. The first design is always wrong</h2>
-			<p>Our first schema had one big <code>transactions</code> table with a column for everything. Drug name, quantity, buyer ID, date, time, store, prescription number, notes — all in one row. It felt simple. Until we started writing the alert queries and realized we needed to join transactions against a buyer-history rollup, against a drug-controlled-list, against per-store thresholds. The queries got ugly fast. The "simple" schema was making everything harder.</p>
+			<p>Our first schema had one big <code>transactions</code> table with a column for everything. Drug name, quantity, buyer ID, date, time, store, prescription number, notes, all in one row. It felt simple. Until we started writing the alert queries and realized we needed to join transactions against a buyer-history rollup, against a drug-controlled-list, against per-store thresholds. The queries got ugly fast. The "simple" schema was making everything harder.</p>
 
 			<p>We rewrote it three weeks in. Split into proper tables, added foreign keys, indexed the right columns. Lost a week. Saved a month.</p>
 
@@ -111,17 +111,17 @@
 
 			<p>It was the system clock. The test machine had drifted by about 40 minutes, so when we logged a transaction "now" and the alert engine queried "everything in the last hour," the engine thought transactions in the future had already happened. The alert engine was right. The clocks were wrong.</p>
 
-			<p>This is the lesson: <strong>when something doesn't make sense, don't keep looking at the code. Look at the assumptions.</strong> Time, timezones, encodings, network reachability, file permissions, environment variables — the bug is often in the layer you didn't think to question.</p>
+			<p>This is the lesson: <strong>when something doesn't make sense, don't keep looking at the code. Look at the assumptions.</strong> Time, timezones, encodings, network reachability, file permissions, environment variables: the bug is often in the layer you didn't think to question.</p>
 
 			<h2>3. Real users will break it in ways you didn't imagine</h2>
 			<p>We tested with sample data. Real drug stores typed product names with inconsistent spacing, capitalization, and abbreviations. "AMOXICILLIN 500MG" / "amoxicillin 500 mg" / "Amox 500" all referred to the same drug, and our exact-match logic was treating them as three different products. Alerts that should have fired didn't. Alerts that shouldn't have, did.</p>
 
-			<p>The fix was a normalization layer — strip whitespace, lowercase, fuzzy-match against a canonical drug list. Boring code. Critical code. The kind of code I now write first instead of last.</p>
+			<p>The fix was a normalization layer: strip whitespace, lowercase, fuzzy-match against a canonical drug list. Boring code. Critical code. The kind of code I now write first instead of last.</p>
 
 			<h2>4. Documentation is the project</h2>
 			<p>Halfway through, my teammate got sick for a week. I tried to pick up the part of the system she'd been working on and immediately got stuck because nothing was documented. Variable names made sense to her, not to me. Decision rationales lived in chat messages I'd already lost.</p>
 
-			<p>We started writing things down — short README files inside each folder explaining what it did, why we chose this library over that one, what the gotchas were. It felt slow at the time. By the final defense it was the most useful thing we'd built. The panel asked questions and we had real answers because we'd written them down for ourselves.</p>
+			<p>We started writing things down: short README files inside each folder explaining what it did, why we chose this library over that one, what the gotchas were. It felt slow at the time. By the final defense it was the most useful thing we'd built. The panel asked questions and we had real answers because we'd written them down for ourselves.</p>
 
 			<h2>5. The system that ships is better than the system that's perfect</h2>
 			<p>We had a list of features that didn't make it: SMS notifications, multi-store admin dashboard, machine-learning-based anomaly detection (yes, we considered it). Cutting them was painful at the time. Looking back, every cut was correct. The version that shipped was small enough to actually finish, polish, and demo. A bigger system would have been half-broken in three more places.</p>
@@ -129,7 +129,7 @@
 			<blockquote>You can't iterate on what you didn't ship.</blockquote>
 
 			<h2>What I take with me now</h2>
-			<p>The technical skills from RxFY transferred directly to my current backend role at <a href="https://rocketserve.app" target="_blank" rel="noopener">RocketServe</a>. But the lessons above — design will change, bugs aren't where you think, real users break things, write things down, ship — those are the ones I quote at myself almost daily. Thesis was practice. Production is just thesis with consequences.</p>
+			<p>The technical skills from RxFY transferred directly to my current backend role at <a href="https://rocketserve.app" target="_blank" rel="noopener">RocketServe</a>. But the lessons above (design will change, bugs aren't where you think, real users break things, write things down, ship) are the ones I quote at myself almost daily. Thesis was practice. Production is just thesis with consequences.</p>
 
 			<p>If you're still in school working on a capstone or a final-year project: <strong>treat it like real work</strong>. The grade matters less than the habits you build doing it. Those habits compound for years.</p>
 

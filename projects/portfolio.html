@@ -8,14 +8,14 @@
 	<meta charset="utf-8">
 	<title>Personal Portfolio | Case Study</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Case study of the personal portfolio site you're reading right now — its architecture, design system, and the manifest-driven content approach.">
+	<meta name="description" content="Case study of the personal portfolio site you're reading right now: its architecture, design system, and the manifest-driven content approach.">
 	<meta name="author" content="Chester Ewing Columna">
 	<meta property="og:title" content="Portfolio Case Study">
 	<meta property="og:url" content="https://chesterewing.github.io/projects/portfolio.html">
 	<meta property="og:image" content="https://chesterewing.github.io/images/og/work.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Chester Ewing Columna — Backend Developer">
+<meta property="og:image:alt" content="Chester Ewing Columna · Backend Developer">
 
 	<link rel="canonical" href="https://chesterewing.github.io/projects/portfolio.html">
 <link rel="icon" href="../images/logo-mark.svg">
@@ -39,7 +39,7 @@
 
 <header class="header">
   <div class="container">
-    <a class="brand" href="../index.html" aria-label="Chester Ewing Columna — home">
+    <a class="brand" href="../index.html" aria-label="Chester Ewing Columna · home">
       <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <rect x="1.25" y="1.25" width="29.5" height="29.5" rx="8" stroke="currentColor" stroke-opacity=".18" stroke-width="1.5"/>
         <path d="M20.5 10.64A7 7 0 1 0 20.5 21.36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
@@ -57,7 +57,7 @@
     </nav>
 
     <div class="header-actions">
-      <button class="theme-toggle" data-cmdk type="button" aria-label="Search — Ctrl+K" title="Search — Ctrl+K">
+      <button class="theme-toggle" data-cmdk type="button" aria-label="Search · Ctrl+K" title="Search · Ctrl+K">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
         </svg>
@@ -96,7 +96,7 @@
 					<span class="cec-cs-cat">Personal · Web · PWA</span>
 				</div>
 				<h1 class="cec-cs-title">Personal Portfolio</h1>
-				<p class="cec-cs-subtitle">The site you&rsquo;re reading right now &mdash; manifest-driven, dependency-free, dark and light, PWA-installable.</p>
+				<p class="cec-cs-subtitle">The site you&rsquo;re reading right now: manifest-driven, dependency-free, dark and light, PWA-installable.</p>
 				<div class="cec-cs-hero-img" style="background-image: url('../images/work-2.png');"></div>
 				<div class="cec-cs-cta-row">
 					<a href="../index.html" class="btn btn-primary btn-custom">Visit Live Site →</a>
@@ -112,17 +112,17 @@
 
 			<section class="cec-cs-section">
 				<h2>The Problem</h2>
-				<p>Resumes are flat. LinkedIn is a CV with extra steps. I needed a place online that could show what I do, how I think, and how to reach me — without dumbing any of those down. Most importantly, it had to be easy enough to update that I'd actually keep it current.</p>
+				<p>Resumes are flat. LinkedIn is a CV with extra steps. I needed a place online that could show what I do, how I think, and how to reach me, without dumbing any of those down. Most importantly, it had to be easy enough to update that I'd actually keep it current.</p>
 			</section>
 
 			<section class="cec-cs-section">
 				<h2>Goals</h2>
 				<ul class="cec-cs-list">
-					<li>Show, not just tell — live links, real projects, public client demos</li>
+					<li>Show, not just tell: live links, real projects, public client demos</li>
 					<li>Manifest-driven content (Tools, Showcase, Writing, Testimonials) so updating is a JSON edit, not an HTML rewrite</li>
-					<li>Restrained, not decorated — one accent color, no gradients, nothing that moves for its own sake</li>
-					<li>Fast everywhere — installable PWA, mobile-first, zero dependencies</li>
-					<li>Never stale — durations compute from a start date rather than being typed in</li>
+					<li>Restrained, not decorated: one accent color, no gradients, nothing that moves for its own sake</li>
+					<li>Fast everywhere: installable PWA, mobile-first, zero dependencies</li>
+					<li>Never stale: durations compute from a start date rather than being typed in</li>
 				</ul>
 			</section>
 
@@ -172,7 +172,7 @@
 						<line class="cec-arch-arrow" x1="470" y1="200" x2="470" y2="240"/>
 					</svg>
 				</div>
-				<p>Static HTML pages, one shared <code>app.js</code> for everything dynamic (nav, theme toggle, scroll reveal, tenure counters, manifest loaders, capacity meter, scope estimator, contact form). Every module is guarded by its own DOM hook, so each page runs only what it needs. Content for Tools / Writing / Showcase / Testimonials lives in JSON manifests — adding an entry is one file edit.</p>
+				<p>Static HTML pages, one shared <code>app.js</code> for everything dynamic (nav, theme toggle, scroll reveal, tenure counters, manifest loaders, capacity meter, scope estimator, contact form). Every module is guarded by its own DOM hook, so each page runs only what it needs. Content for Tools / Writing / Showcase / Testimonials lives in JSON manifests. Adding an entry is one file edit.</p>
 				<p>The 2026 rebuild cut the dependency tree to nothing: jQuery, Bootstrap, Owl Carousel, Magnific Popup, Modernizr, respond.js and SweetAlert2 all came out, and <code>custom.css</code> went from 268&nbsp;KB to a single token-driven stylesheet. Twelve pages became five.</p>
 			</section>
 
@@ -190,18 +190,18 @@
 			<section class="cec-cs-section">
 				<h2>Key Decisions</h2>
 				<ol class="cec-cs-decisions">
-					<li><strong>Static, not SSR.</strong> No build step, no server needed, hosts anywhere. The cost is no per-page personalization — fine for a portfolio.</li>
+					<li><strong>Static, not SSR.</strong> No build step, no server needed, hosts anywhere. The cost is no per-page personalization, fine for a portfolio.</li>
 					<li><strong>One CSS file with design tokens.</strong> Dark and light both live in <code>:root</code> variables. Switching is one attribute on <code>&lt;html&gt;</code>, applied before first paint so there is no color flash.</li>
 					<li><strong>Manifest-driven content sections.</strong> Tools, Showcase, Writing, Testimonials, Projects all read from JSON. Future-me adds entries without touching HTML.</li>
 					<li><strong>Compute, never type, anything time-based.</strong> Job tenure, years in tech and day counts all derive from a start date, so copy that states a duration cannot drift out of date.</li>
-					<li><strong>Placeholder testimonials never render.</strong> Sample entries carry a <code>_sample</code> flag and the loader skips them — a visitor cannot tell a placeholder quote from a real one, so it should never reach them.</li>
+					<li><strong>Placeholder testimonials never render.</strong> Sample entries carry a <code>_sample</code> flag and the loader skips them. A visitor cannot tell a placeholder quote from a real one, so it should never reach them.</li>
 				</ol>
 			</section>
 
 			<section class="cec-cs-section">
 				<h2>Features Built</h2>
 				<ul class="cec-cs-list">
-						<li>Dark/light theme toggle applied before first paint — no color flash</li>
+						<li>Dark/light theme toggle applied before first paint, no color flash</li>
 						<li>Live tenure counter (years / months / weeks / days), computed from a start date</li>
 						<li>Manifest-driven Tools, Showcase, Writing, Testimonials and Projects pages</li>
 						<li>Availability meter whose next-start date is always today + lead time</li>
@@ -219,7 +219,7 @@
 						<li><strong>CSS variables &gt; theme rebuilds.</strong> Light mode is ~20 lines of variable overrides. The token setup pays for itself immediately.</li>
 						<li><strong>Don't over-engineer.</strong> No bundler, no React, no framework, and after the 2026 rebuild no jQuery or Bootstrap either. Vanilla does the job and the page stays fast.</li>
 						<li><strong>Manifest-driven everything.</strong> Every page that is a list reads a JSON file. Adding content is editing data, not layout.</li>
-						<li><strong>Minimal is not the same as empty.</strong> The first pass of the rebuild cut the clutter but left dead space, and it read as unfinished. Restraint still needs density — bordered panels, real images, tight spacing.</li>
+						<li><strong>Minimal is not the same as empty.</strong> The first pass of the rebuild cut the clutter but left dead space, and it read as unfinished. Restraint still needs density: bordered panels, real images, tight spacing.</li>
 						<li><strong>Measure the images.</strong> The portrait was a 1.4&nbsp;MB, 3215&times;4286 JPEG. Downscaling the image set took it from 6.5&nbsp;MB to 520&nbsp;KB, which matters a lot on mobile data.</li>
 					</ul>
 			</section>

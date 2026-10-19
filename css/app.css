@@ -1818,7 +1818,8 @@ main { counter-reset: sect; }
 @media (min-width: 700px) {
   .article p,
   .prose p,
-  .cec-cs-section p {
+  .cec-cs-section p,
+  .faq__body {
     text-align: justify;
     hyphens: auto;
     -webkit-hyphens: auto;

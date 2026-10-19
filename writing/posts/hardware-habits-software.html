@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<title>Hardware Habits That Made Me a Better Software Engineer | Chester Ewing Columna</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Working with embedded systems teaches a different mindset — finite resources, no easy retries, read the datasheet. Those habits transfer.">
+	<meta name="description" content="Working with embedded systems teaches a different mindset: finite resources, no easy retries, read the datasheet. Those habits transfer.">
 	<meta name="author" content="Chester Ewing Columna">
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="Hardware Habits That Made Me a Better Software Engineer | Chester Ewing Columna">
@@ -16,9 +16,9 @@
 	<meta property="og:image" content="https://chesterewing.github.io/images/og/writing.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Chester Ewing Columna — Backend Developer">
+<meta property="og:image:alt" content="Chester Ewing Columna · Backend Developer">
 	<meta property="og:site_name" content="Chester Ewing Columna Portfolio">
-	<meta property="og:description" content="Working with embedded systems teaches a different mindset — finite resources, no easy retries, read the datasheet. Those habits transfer.">
+	<meta property="og:description" content="Working with embedded systems teaches a different mindset: finite resources, no easy retries, read the datasheet. Those habits transfer.">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Hardware Habits That Made Me a Better Software Engineer | Chester Ewing Columna">
 	<meta name="twitter:image" content="https://chesterewing.github.io/images/og/writing.png">
@@ -46,7 +46,7 @@
 
 <header class="header">
   <div class="container">
-    <a class="brand" href="../../index.html" aria-label="Chester Ewing Columna — home">
+    <a class="brand" href="../../index.html" aria-label="Chester Ewing Columna · home">
       <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <rect x="1.25" y="1.25" width="29.5" height="29.5" rx="8" stroke="currentColor" stroke-opacity=".18" stroke-width="1.5"/>
         <path d="M20.5 10.64A7 7 0 1 0 20.5 21.36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
@@ -64,7 +64,7 @@
     </nav>
 
     <div class="header-actions">
-      <button class="theme-toggle" data-cmdk type="button" aria-label="Search — Ctrl+K" title="Search — Ctrl+K">
+      <button class="theme-toggle" data-cmdk type="button" aria-label="Search · Ctrl+K" title="Search · Ctrl+K">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
         </svg>
@@ -95,27 +95,27 @@
 			<h1>Hardware Habits That Made Me a Better Software Engineer</h1>
 			<div class="post-meta">December 30, 2025 · 4 min read · hardware · embedded · craft</div>
 
-			<p>I started doing embedded projects in school — Arduino, Raspberry Pi, the occasional KiCad board. I figured the skills would mostly stay separate from the web work I was doing on the side. They didn't. The mindset of working with hardware turned out to fix bad habits I didn't even know I had as a software developer.</p>
+			<p>I started doing embedded projects in school: Arduino, Raspberry Pi, the occasional KiCad board. I figured the skills would mostly stay separate from the web work I was doing on the side. They didn't. The mindset of working with hardware turned out to fix bad habits I didn't even know I had as a software developer.</p>
 
 			<p>Five things hardware taught me that I now use every day in backend code:</p>
 
 			<h2>1. Resources are not free</h2>
-			<p>On a microcontroller you have maybe 32 KB of RAM. You can't just allocate a 10MB array because you forgot to clean it up — there isn't a 10MB array to allocate. You think about memory before you write. You free things deliberately.</p>
+			<p>On a microcontroller you have maybe 32 KB of RAM. You can't just allocate a 10MB array because you forgot to clean it up. There isn't a 10MB array to allocate. You think about memory before you write. You free things deliberately.</p>
 
 			<p>In high-level languages it's easy to forget that any of this exists. Then your Node.js process eats 4GB and crashes the server, and suddenly you wish you'd been careful. Hardware made me ask, on every chunk of code: <em>how big does this get? Does it grow forever? When does it get released?</em></p>
 
 			<h2>2. There's no "just retry"</h2>
-			<p>If your sensor read fails, you can't pop a toast and ask the user to refresh. You handle it now or the system fails. Web developers reach for retries reflexively — sometimes that's right, often it's hiding a bug that should be fixed at the source. Hardware forces you to think about <em>what should happen when this never works</em>, not just <em>what should happen when this eventually works</em>.</p>
+			<p>If your sensor read fails, you can't pop a toast and ask the user to refresh. You handle it now or the system fails. Web developers reach for retries reflexively. Sometimes that's right, often it's hiding a bug that should be fixed at the source. Hardware forces you to think about <em>what should happen when this never works</em>, not just <em>what should happen when this eventually works</em>.</p>
 
 			<blockquote>Retries are a wonderful tool. They're also a wonderful place to bury problems.</blockquote>
 
 			<h2>3. Read the datasheet</h2>
 			<p>If you're using a sensor, the datasheet has the answer. Not a Stack Overflow post. Not a YouTube tutorial. The actual document the manufacturer wrote, with timing diagrams and edge cases nobody has bothered to blog about. It's boring. It's also the truth.</p>
 
-			<p>Software has datasheets too — they're called specs, RFCs, and source code. When I'm stuck on a library now, I open the source instead of searching. The answer is usually there in five minutes. The blog post that doesn't quite match my version would have taken an hour.</p>
+			<p>Software has datasheets too: they're called specs, RFCs, and source code. When I'm stuck on a library now, I open the source instead of searching. The answer is usually there in five minutes. The blog post that doesn't quite match my version would have taken an hour.</p>
 
 			<h2>4. Test in the real environment, not the simulator</h2>
-			<p>Code that works on the breadboard at room temperature doesn't always work in a hot enclosure with a noisy power supply. Embedded engineers test where the thing will actually live. Software engineers — me included — used to skip that step and trust the unit tests on my MacBook.</p>
+			<p>Code that works on the breadboard at room temperature doesn't always work in a hot enclosure with a noisy power supply. Embedded engineers test where the thing will actually live. Software engineers, me included, used to skip that step and trust the unit tests on my MacBook.</p>
 
 			<p>Now I deploy to staging environments that look like production: same OS, same database version, same network conditions. The bugs that hide in your laptop's perfect environment are the bugs your users are going to hit.</p>
 
@@ -125,7 +125,7 @@
 			<p>I now treat flaky tests, intermittent timeouts, and "weird, it worked yesterday" the same way. Those are signals that a model in my head is wrong, not problems to retry past. Find the determinism. The bug is hiding in whatever assumption is failing intermittently.</p>
 
 			<h2>The real lesson</h2>
-			<p>Software is forgiving in ways hardware isn't. You can leak memory and the OS will probably clean it up. You can ship buggy code and patch it tomorrow. You can wave at a flaky test and merge anyway. Hardware doesn't let you do any of those things, and developing under those constraints — even briefly — calibrates your sense of "good enough" upward.</p>
+			<p>Software is forgiving in ways hardware isn't. You can leak memory and the OS will probably clean it up. You can ship buggy code and patch it tomorrow. You can wave at a flaky test and merge anyway. Hardware doesn't let you do any of those things, and developing under those constraints, even briefly, calibrates your sense of "good enough" upward.</p>
 
 			<p>I write web backends now, not firmware. But the discipline carries. Production code that handles real money, real people, and real data deserves the same care a sensor on a board does. Both will fail in front of a user who cannot retry.</p>
 
