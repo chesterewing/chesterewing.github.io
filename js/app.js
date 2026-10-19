@@ -1262,6 +1262,8 @@
     { path: '/api/skills',       label: 'Skills by area' },
     { path: '/api/availability', label: 'Freelance capacity' },
     { path: '/api/writing',      label: 'Published posts' },
+    { path: '/api/login',  method: 'POST', body: { username: 'demo', password: 'demo' }, label: 'Log in, get a signed JWT' },
+    { path: '/api/me',     auth: true,     label: 'Protected route (needs the token)' },
     { path: '/api/health',       label: 'Health check' },
     { path: '/api/nope',         label: 'A 404, on purpose' },
   ];
@@ -1292,8 +1294,13 @@
     const statusOut = $('#api-status', root);
     if (!select || !sendBtn || !resOut) return;
 
+    /* The token returned by POST /api/login is held here and attached to the
+       next request for a protected route, exactly like a client would. */
+    let authToken = null;
+    const routeFor = (p) => API_ROUTES.find((r) => r.path === p) || { path: p };
+
     select.replaceChildren(...API_ROUTES.map((r) =>
-      el('option', { value: r.path, text: `GET ${r.path}  —  ${r.label}` })));
+      el('option', { value: r.path, text: `${r.method || 'GET'} ${r.path}  —  ${r.label}` })));
 
     const swReady = () =>
       'serviceWorker' in navigator && navigator.serviceWorker.controller != null;
@@ -1335,9 +1342,18 @@
 
     const showRequest = (path) => {
       if (!reqOut) return;
-      reqOut.replaceChildren(highlightJson(
-        `GET ${path} HTTP/1.1\nHost: ${location.host}\nAccept: application/json\n`
-      ));
+      const route = routeFor(path);
+      const method = route.method || 'GET';
+      let lines = `${method} ${path} HTTP/1.1\nHost: ${location.host}\nAccept: application/json\n`;
+      if (route.auth) {
+        lines += authToken
+          ? `Authorization: Bearer ${authToken.slice(0, 20)}…\n`
+          : 'Authorization: (none yet — run POST /api/login first)\n';
+      }
+      if (route.body) {
+        lines += `Content-Type: application/json\n\n${JSON.stringify(route.body)}\n`;
+      }
+      reqOut.replaceChildren(highlightJson(lines));
     };
 
     const send = () => {
@@ -1386,13 +1402,25 @@
       statusOut.dataset.state = '';
       resOut.replaceChildren(document.createTextNode('…'));
 
+      const route = routeFor(path);
+      const method = route.method || 'GET';
+      const headers = { Accept: 'application/json' };
+      let fetchBody;
+      if (route.body) { headers['Content-Type'] = 'application/json'; fetchBody = JSON.stringify(route.body); }
+      if (route.auth && authToken) headers['Authorization'] = `Bearer ${authToken}`;
+
       const t0 = performance.now();
-      fetch(path, { headers: { Accept: 'application/json' } })
+      fetch(path, { method, headers, body: fetchBody })
         .then((r) => r.text().then((body) => ({ r, body })))
         .then(({ r, body }) => {
           const ms = Math.max(1, Math.round(performance.now() - t0));
           statusOut.textContent = `${r.status} ${r.statusText || ''} · ${ms} ms · ${(body.length / 1024).toFixed(1)} KB`;
           statusOut.dataset.state = r.ok ? 'ok' : 'err';
+
+          /* Capture the JWT so the protected route can use it next. */
+          if (path === '/api/login' && r.ok) {
+            try { const j = JSON.parse(body); if (j.access_token) authToken = j.access_token; } catch { /* ignore */ }
+          }
 
           let pretty = body;
           try { pretty = JSON.stringify(JSON.parse(body), null, 2); } catch { /* leave as-is */ }

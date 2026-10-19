@@ -9,7 +9,7 @@
 /* Bumped for the 2026 rebuild: the old cache held style.css/custom.css/
    custom.js, none of which exist any more. The activate handler below drops
    every cache whose key doesn't start with this version. */
-const CACHE_VERSION = 'cepc-v51';
+const CACHE_VERSION = 'cepc-v52';
 const ASSET_CACHE   = `${CACHE_VERSION}-assets`;
 
 const CORE_ASSETS = [
@@ -106,7 +106,53 @@ const readManifest = (path) =>
 /* Days between a date and now, used so nothing here is ever hard-coded */
 const daysSince = (iso) => Math.floor((Date.now() - new Date(iso)) / 86400000);
 
-async function handleApi(url) {
+/* --- Real JWTs, signed in the browser -----------------------------------
+ * The auth demo issues and verifies genuine HS256 JSON Web Tokens using the
+ * Web Crypto API (crypto.subtle), which is available inside a service worker
+ * on a secure origin. Nothing is faked: tamper with a single character of the
+ * token and the signature check below rejects it, and the exp claim is
+ * enforced. The secret lives in the worker only because there is no server to
+ * hold it; in production it never leaves the backend. */
+const JWT_SECRET = 'cepc-demo-secret-not-used-anywhere-real';
+
+function b64url(str) {
+  return btoa(unescape(encodeURIComponent(str)))
+    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+function b64urlDecode(str) {
+  const pad = str.length % 4 ? '='.repeat(4 - (str.length % 4)) : '';
+  return decodeURIComponent(escape(atob(str.replace(/-/g, '+').replace(/_/g, '/') + pad)));
+}
+function bytesToB64url(bytes) {
+  let s = '';
+  for (const b of bytes) s += String.fromCharCode(b);
+  return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+async function hmacSign(data) {
+  const key = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(JWT_SECRET),
+    { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(data));
+  return bytesToB64url(new Uint8Array(sig));
+}
+async function makeToken(payload) {
+  const header = b64url(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
+  const body = b64url(JSON.stringify(payload));
+  const sig = await hmacSign(header + '.' + body);
+  return `${header}.${body}.${sig}`;
+}
+async function verifyToken(token) {
+  const parts = (token || '').split('.');
+  if (parts.length !== 3) return { ok: false, reason: 'malformed' };
+  const expected = await hmacSign(parts[0] + '.' + parts[1]);
+  if (expected !== parts[2]) return { ok: false, reason: 'bad_signature' };
+  let payload;
+  try { payload = JSON.parse(b64urlDecode(parts[1])); } catch { return { ok: false, reason: 'malformed' }; }
+  if (payload.exp && Math.floor(Date.now() / 1000) > payload.exp) return { ok: false, reason: 'expired' };
+  return { ok: true, payload };
+}
+
+async function handleApi(req, url) {
   const route = url.pathname.slice(API_PREFIX.length).replace(/\/+$/, '');
   const started = Date.now();
 
@@ -118,12 +164,14 @@ async function handleApi(url) {
         version: '1.0.0',
         served_by: 'service worker (no origin server)',
         endpoints: [
-          { method: 'GET', path: '/api/whoami',       description: 'Identity and current role' },
-          { method: 'GET', path: '/api/projects',     description: 'Project manifest' },
-          { method: 'GET', path: '/api/skills',       description: 'Skills grouped by area' },
-          { method: 'GET', path: '/api/availability', description: 'Freelance capacity, computed live' },
-          { method: 'GET', path: '/api/writing',      description: 'Published posts' },
-          { method: 'GET', path: '/api/health',       description: 'Health check' },
+          { method: 'GET',  path: '/api/whoami',       description: 'Identity and current role' },
+          { method: 'GET',  path: '/api/projects',     description: 'Project manifest' },
+          { method: 'GET',  path: '/api/skills',       description: 'Skills grouped by area' },
+          { method: 'GET',  path: '/api/availability', description: 'Freelance capacity, computed live' },
+          { method: 'GET',  path: '/api/writing',      description: 'Published posts' },
+          { method: 'POST', path: '/api/login',        description: 'Exchange demo/demo for a signed JWT' },
+          { method: 'GET',  path: '/api/me',           description: 'Protected: requires a valid Bearer token' },
+          { method: 'GET',  path: '/api/health',       description: 'Health check' },
         ],
       });
 
@@ -192,8 +240,53 @@ async function handleApi(url) {
       });
     }
 
+    case 'login': {
+      if (req.method !== 'POST') {
+        return jsonResponse(
+          { error: 'method_not_allowed', message: 'Use POST /api/login with a JSON body.', allow: ['POST'] },
+          405, { Allow: 'POST' });
+      }
+      let creds = {};
+      try { creds = await req.json(); }
+      catch { try { const fd = await req.formData(); creds = Object.fromEntries(fd); } catch { creds = {}; } }
+      const user = String(creds.username || '').trim();
+      const pass = String(creds.password || '');
+      if (user !== 'demo' || pass !== 'demo') {
+        return jsonResponse(
+          { error: 'invalid_credentials', hint: 'The demo credentials are  demo / demo' }, 401);
+      }
+      const now = Math.floor(Date.now() / 1000);
+      const token = await makeToken({ sub: 'demo-user', name: 'Demo Visitor', role: 'guest', iat: now, exp: now + 3600 });
+      return jsonResponse({ token_type: 'Bearer', expires_in: 3600, access_token: token });
+    }
+
+    case 'me': {
+      const auth = req.headers.get('Authorization') || '';
+      const m = auth.match(/^Bearer\s+(.+)$/i);
+      if (!m) {
+        return jsonResponse(
+          { error: 'missing_token', hint: 'POST /api/login first, then send  Authorization: Bearer <token>' },
+          401, { 'WWW-Authenticate': 'Bearer' });
+      }
+      const v = await verifyToken(m[1]);
+      if (!v.ok) {
+        return jsonResponse(
+          { error: 'invalid_token', reason: v.reason, hint: 'Tokens are HMAC-signed; a tampered or expired one is rejected.' },
+          401, { 'WWW-Authenticate': 'Bearer error="invalid_token"' });
+      }
+      return jsonResponse({
+        authenticated: true,
+        subject: v.payload.sub,
+        name: v.payload.name,
+        role: v.payload.role,
+        issued_at: new Date(v.payload.iat * 1000).toISOString(),
+        expires_at: new Date(v.payload.exp * 1000).toISOString(),
+        note: 'HMAC-SHA256 signature verified by the service worker. Real JWT, no server.',
+      });
+    }
+
     case 'health':
-      return jsonResponse({ status: 'ok', uptime_note: 'static site — always up', latency_ms: Date.now() - started });
+      return jsonResponse({ status: 'ok', uptime_note: 'static site, always up', latency_ms: Date.now() - started });
 
     default:
       return jsonResponse(
@@ -205,18 +298,20 @@ async function handleApi(url) {
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
-  if (req.method !== 'GET') return;
-
   const url = new URL(req.url);
 
-  /* Mock API comes first — it never touches the cache.
+  /* Mock API comes first — it never touches the cache, and it is checked
+     before the GET-only guard below so POST /api/login can be handled.
      Note the bare "/api" case: it has no trailing slash, so a startsWith
      check against "/api/" alone would miss the route index. */
   const isApi = url.pathname === '/api' || url.pathname.startsWith(API_PREFIX);
   if (url.origin === self.location.origin && isApi) {
-    event.respondWith(handleApi(url));
+    event.respondWith(handleApi(req, url));
     return;
   }
+
+  /* Everything past this point is cache logic, which only applies to GETs. */
+  if (req.method !== 'GET') return;
   const isHTML = req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
   const isJSON = url.pathname.endsWith('.json');
   const isJSorCSS = /\.(?:js|css)$/.test(url.pathname);
