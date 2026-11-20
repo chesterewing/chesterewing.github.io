@@ -9,7 +9,7 @@
 /* Bumped for the 2026 rebuild: the old cache held style.css/custom.css/
    custom.js, none of which exist any more. The activate handler below drops
    every cache whose key doesn't start with this version. */
-const CACHE_VERSION = 'cepc-v52';
+const CACHE_VERSION = 'cepc-v53';
 const ASSET_CACHE   = `${CACHE_VERSION}-assets`;
 
 const CORE_ASSETS = [

@@ -453,6 +453,7 @@
 
     json('showcase/index.json').then((d) => {
       const items = (d.items || []).filter((s) => s && s.title);
+      const group = (s) => (s.category || 'Other').split('/')[0].trim();
       if (!items.length) { grid.replaceChildren(el('p', { class: 'empty', text: 'No demos yet.' })); return; }
 
       grid.replaceChildren(...items.map((s) => {
@@ -478,21 +479,44 @@
           media.append(monogram());
         }
 
-        return el('article', { class: 'card card--link reveal' },
+        /* "coming-soon" items have no demo folder yet, so they get no demo
+           link and an early-interest button instead of Buy */
+        const soon = s.status === 'coming-soon';
+        const demo = `${base}showcase/${esc(s.slug)}/index.html`;
+
+        return el('article', { class: soon ? 'card reveal' : 'card card--link reveal', 'data-group': group(s) },
           media,
           el('div', { class: 'card__head' },
-            el('h3', { class: 'card__title' }, el('a', { href: `${base}showcase/${esc(s.slug)}/index.html`, text: s.title })),
-            s.price ? el('span', { class: 'chip chip--accent', text: s.price }) : null
+            el('h3', { class: 'card__title' }, soon ? s.title : el('a', { href: demo, text: s.title })),
+            soon ? el('span', { class: 'chip', text: 'Coming soon' })
+                 : s.price ? el('span', { class: 'chip chip--accent', text: s.price }) : null
           ),
           s.category ? el('p', { class: 'card__sub', text: s.category }) : null,
           el('p', { class: 'card__body', text: s.description || '' }),
           el('div', { class: 'chips' }, (s.tags || []).slice(0, 6).map((t) => el('span', { class: 'chip', text: t }))),
           el('div', { class: 'card__foot' },
-            el('a', { class: 'link-arrow', href: `${base}showcase/${esc(s.slug)}/index.html` }, 'Open demo'),
-            s.buyUrl ? el('a', { class: 'btn btn--ghost', href: s.buyUrl }, 'Buy this') : null
+            soon ? null : el('a', { class: 'link-arrow', href: demo }, 'Open demo'),
+            s.buyUrl ? el('a', { class: 'btn btn--ghost', href: s.buyUrl }, soon ? 'Get notified' : 'Buy this') : null
           )
         );
       }));
+
+      /* Filter chips, only on pages that ask for them (shop.html). Groups come
+         from the part of `category` before the slash, e.g. "SaaS / Bookings". */
+      const bar = $('#showcase-filters');
+      const groups = [...new Set(items.map(group))];
+      if (bar && groups.length > 1) {
+        const cards = $$('[data-group]', grid);
+        const buttons = ['All', ...groups].map((g) => el('button', {
+          type: 'button', class: 'chip chip--filter', 'aria-pressed': String(g === 'All'), text: g,
+          onclick() {
+            buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === this)));
+            cards.forEach((c) => { c.style.display = g === 'All' || c.dataset.group === g ? '' : 'none'; });
+          },
+        }));
+        bar.replaceChildren(...buttons);
+        bar.hidden = false;
+      }
       initReveal();
     }).catch(() => { grid.replaceChildren(el('p', { class: 'empty', text: 'Could not load the showcase.' })); });
   }
@@ -727,7 +751,7 @@
      hints shown in the footer. */
 
   function initShortcuts() {
-    const map = { h: 'index.html', w: 'work.html', a: 'about.html', r: 'writing.html', c: 'contact.html' };
+    const map = { h: 'index.html', w: 'work.html', s: 'shop.html', a: 'about.html', r: 'writing.html', c: 'contact.html' };
     let armed = false;
     let timer = null;
 
@@ -1138,6 +1162,7 @@
     const ITEMS = [
       { label: 'Home',      kind: 'page', href: base + 'index.html' },
       { label: 'Work',      kind: 'page', href: base + 'work.html' },
+      { label: 'Shop',      kind: 'page', href: base + 'shop.html' },
       { label: 'About',     kind: 'page', href: base + 'about.html' },
       { label: 'Writing',   kind: 'page', href: base + 'writing.html' },
       { label: 'Hire me',   kind: 'page', href: base + 'contact.html' },

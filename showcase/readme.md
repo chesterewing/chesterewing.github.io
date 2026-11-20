@@ -1,6 +1,6 @@
 # Showcase folder
 
-This is where I drop website demos so they show up on **/showcase.html** automatically.
+This is where I drop website demos so they show up on **/shop.html** automatically.
 
 ## Adding a new demo (3 steps)
 
@@ -28,7 +28,7 @@ This is where I drop website demos so they show up on **/showcase.html** automat
    }
    ```
 
-3. **Refresh `/showcase.html`** — the card appears.
+3. **Refresh `/shop.html`** — the card appears.
 
 ## Light source-code "protection" (optional)
 
@@ -49,4 +49,4 @@ cd c:\Users\programmer\Desktop\web
 python -m http.server 8000
 ```
 
-Then visit http://localhost:8000/showcase.html
+Then visit http://localhost:8000/shop.html
