@@ -482,21 +482,25 @@
         /* "coming-soon" items have no demo folder yet, so they get no demo
            link and an early-interest button instead of Buy */
         const soon = s.status === 'coming-soon';
+        const onRequest = s.status === 'demo-on-request';
+        const noDemo = soon || onRequest;
         const demo = `${base}showcase/${esc(s.slug)}/index.html`;
 
-        return el('article', { class: soon ? 'card reveal' : 'card card--link reveal', 'data-group': group(s) },
+        return el('article', { class: noDemo ? 'card reveal' : 'card card--link reveal', 'data-group': group(s) },
           media,
           el('div', { class: 'card__head' },
-            el('h3', { class: 'card__title' }, soon ? s.title : el('a', { href: demo, text: s.title })),
+            el('h3', { class: 'card__title' }, noDemo ? s.title : el('a', { href: demo, text: s.title })),
             soon ? el('span', { class: 'chip', text: 'Coming soon' })
-                 : s.price ? el('span', { class: 'chip chip--accent', text: s.price }) : null
+                 : s.price ? el('span', { class: 'chip chip--accent', text: s.price })
+                 : onRequest ? el('span', { class: 'chip chip--accent', text: 'Demo on request' }) : null
           ),
           s.category ? el('p', { class: 'card__sub', text: s.category }) : null,
           el('p', { class: 'card__body', text: s.description || '' }),
           el('div', { class: 'chips' }, (s.tags || []).slice(0, 6).map((t) => el('span', { class: 'chip', text: t }))),
           el('div', { class: 'card__foot' },
-            soon ? null : el('a', { class: 'link-arrow', href: demo }, 'Open demo'),
-            s.buyUrl ? el('a', { class: 'btn btn--ghost', href: s.buyUrl }, soon ? 'Get notified' : 'Buy this') : null
+            noDemo ? null : el('a', { class: 'link-arrow', href: demo }, 'Open demo'),
+            s.buyUrl ? el('a', { class: onRequest ? 'btn btn--primary' : 'btn btn--ghost', href: s.buyUrl },
+              soon ? 'Get notified' : onRequest ? 'Request a demo' : 'Buy this') : null
           )
         );
       }));

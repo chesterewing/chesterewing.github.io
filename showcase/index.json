@@ -26,7 +26,7 @@
     "preview      -> Filename of the thumbnail inside the folder. Leave empty to use the gradient fallback.",
     "tags         -> Array of short tech/style chips (e.g. [\"HTML\", \"CSS\", \"Responsive\"]).",
     "buyUrl       -> Where the Buy button goes. mailto: works fine. Encode spaces as %20.",
-    "status       -> OPTIONAL. Set to \"coming-soon\" for a product with no demo folder yet: hides Open demo, shows a Coming soon chip, and the button reads Get notified."
+    "status       -> OPTIONAL. \"coming-soon\": no demo folder yet (Coming soon chip, Get notified button). \"demo-on-request\": finished product without a public demo (Demo on request chip, Request a demo button). Leave out for normal items."
   ],
   "_STEP_5_SAVE_AND_REFRESH": [
     "Save this file.",
@@ -52,20 +52,20 @@
       "slug": "resort-booking",
       "title": "Resort & Pool Booking",
       "category": "SaaS / Resort Booking",
-      "description": "A complete booking website for private resorts and pool rentals: photo gallery, day tour and overnight rates, live availability calendar, booking form with GCash downpayment upload, and an owner dashboard to approve bookings. No more double bookings or \"available po ba?\" messages.",
+      "description": "A complete booking website and owner app for private resorts and pool rentals. Live availability calendar with no double bookings, day tour, overnight and 22-hour rates, GCash downpayment with screenshot upload, check-in QR, and an owner dashboard to approve bookings from a phone. English and Tagalog. Installs as an app on Android, iPhone and Windows.",
       "price": "",
-      "status": "coming-soon",
-      "preview": "",
+      "status": "demo-on-request",
+      "preview": "preview.jpg",
       "tags": [
         "PHP",
         "MySQL",
         "Booking",
-        "Calendar",
-        "Admin Dashboard",
+        "Owner App",
         "GCash",
-        "Responsive"
+        "PWA / APK",
+        "English + Tagalog"
       ],
-      "buyUrl": "mailto:ce.columna404@gmail.com?subject=Notify%20me%3A%20Resort%20%26%20Pool%20Booking"
+      "buyUrl": "mailto:ce.columna404@gmail.com?subject=Demo%20request%3A%20Resort%20%26%20Pool%20Booking"
     },
     {
       "slug": "saas-suite-bookings",
