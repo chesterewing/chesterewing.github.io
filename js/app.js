@@ -492,7 +492,7 @@
           el('div', { class: 'card__head' },
             el('h3', { class: 'card__title' }, noDemo ? s.title : el('a', { href: demo, text: s.title })),
             soon ? el('span', { class: 'chip', text: 'Coming soon' })
-                 : liveDemo ? el('span', { class: 'chip chip--accent', text: 'Live demo' })
+                 : liveDemo ? el('span', { class: 'chip chip--accent', text: s.price || 'Live demo' })
                  : s.price ? el('span', { class: 'chip chip--accent', text: s.price })
                  : onRequest ? el('span', { class: 'chip chip--accent', text: 'Demo on request' }) : null
           ),
