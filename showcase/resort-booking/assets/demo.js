@@ -74,6 +74,10 @@
   function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
   var state = load();
 
+  /* Attach-once guards: this is a single-page app, so render functions must
+     not keep adding global listeners on every navigation. */
+  var _wiredZoom = false, _wiredScroll = false, _galleryKey = false, _lbActive = null;
+
   function peso(n) { return '₱' + Math.round(n).toLocaleString('en-PH'); }
   function ymd(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
   function parse(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
@@ -566,8 +570,7 @@
 
     app.className = 'demo-stage admin-body';
     app.innerHTML = html;
-    var bar = document.querySelector('.topbar');
-    window.addEventListener('scroll', function () { bar.classList.toggle('scrolled', window.scrollY > 4); }, { passive: true });
+    wireTopbarScroll();
     wireZoom();
     scrollTop();
   }
@@ -796,7 +799,12 @@
     t.innerHTML = '<span>' + esc(msg) + '</span>'; t.classList.add('show');
     clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('show'); }, 4000);
   }
+  function wireTopbarScroll() {
+    if (_wiredScroll) return; _wiredScroll = true;
+    window.addEventListener('scroll', function () { var bar = document.querySelector('.topbar'); if (bar) bar.classList.toggle('scrolled', window.scrollY > 4); }, { passive: true });
+  }
   function wireZoom() {
+    if (_wiredZoom) return; _wiredZoom = true;
     document.addEventListener('click', function (e) {
       var a = e.target.closest('[data-zoom]'); if (!a) return; e.preventDefault();
       var box = document.createElement('div'); box.className = 'zoom';
@@ -826,9 +834,12 @@
       stage.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
       stage.addEventListener('touchend', function (e) { var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1)); });
     }
-    function close() { if (box) { box.remove(); box = null; document.documentElement.style.overflow = ''; } }
-    g.addEventListener('click', function (e) { var a = e.target.closest('a'); if (!a) return; e.preventDefault(); open([].indexOf.call(g.querySelectorAll('a'), a)); });
-    document.addEventListener('keydown', function (e) { if (!box) return; if (e.key === 'Escape') close(); if (e.key === 'ArrowRight') show(idx + 1); if (e.key === 'ArrowLeft') show(idx - 1); });
+    function close() { if (box) { box.remove(); box = null; _lbActive = null; document.documentElement.style.overflow = ''; } }
+    g.addEventListener('click', function (e) { var a = e.target.closest('a'); if (!a) return; e.preventDefault(); open([].indexOf.call(g.querySelectorAll('a'), a)); _lbActive = { next: function () { show(idx + 1); }, prev: function () { show(idx - 1); }, close: close }; });
+    if (!_galleryKey) {
+      _galleryKey = true;
+      document.addEventListener('keydown', function (e) { if (!_lbActive) return; if (e.key === 'Escape') _lbActive.close(); else if (e.key === 'ArrowRight') _lbActive.next(); else if (e.key === 'ArrowLeft') _lbActive.prev(); });
+    }
   }
   function reveal() {
     var els = document.querySelectorAll('.reveal');
