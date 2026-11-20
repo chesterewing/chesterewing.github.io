@@ -790,6 +790,7 @@
     var b = '<div class="list">' +
       '<a class="item" href="#/admin/rates"><span class="platform__icon">' + svg('tag') + '</span><span class="item__main"><b>Rates</b><span>Prices guests see</span></span>' + svg('next') + '</a>' +
       '<a class="item" href="#/"><span class="platform__icon">' + svg('external') + '</span><span class="item__main"><b>View website</b><span>See what guests see</span></span></a>' +
+      '<a class="item" href="guide.html" target="_blank" rel="noopener"><span class="platform__icon">' + svg('info') + '</span><span class="item__main"><b>Owner’s guide</b><span>Simple steps, English &amp; Tagalog</span></span>' + svg('external') + '</a>' +
       '</div><div class="card card--brand"><b>Full version adds:</b><p class="subtle mt-1">Photos, Reviews &amp; FAQ, monthly Reports with CSV export, Settings (GCash, logo, colors, app links), terms &amp; cancellation policy, website analytics, staff accounts, email alerts, English/Tagalog, and install as an app.</p></div>';
     ownerShell('More', b, null);
   }

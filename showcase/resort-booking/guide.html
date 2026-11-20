@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Owner's Guide — Resort &amp; Pool Booking</title>
+<meta name="description" content="A simple, step-by-step guide for resort owners: how to get your booking website live and how to run it from your phone. English and Tagalog.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f5257'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+<style>
+@font-face { font-family:'Fraunces'; font-style:normal; font-weight:400 700; font-display:swap; src:url(assets/fonts/fraunces-normal.woff2) format('woff2'); }
+@font-face { font-family:'Inter'; font-style:normal; font-weight:400 700; font-display:swap; src:url(assets/fonts/inter-normal.woff2) format('woff2'); }
+:root{ --sand:#f7f3ec; --sand2:#efe7da; --surface:#fffdf9; --ink:#15231f; --ink2:#44524e; --ink3:#7d8884; --brand:#0f5257; --gold:#c39a55; --line:#e7dfd2; --serif:'Fraunces',Georgia,serif; --font:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif; }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--sand);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.015em;line-height:1.15;margin:0}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px}
+a{color:var(--brand)}
+em{font-family:var(--serif);font-style:italic}
+
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--sand) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:1rem;min-height:62px}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-weight:600;font-size:1.1rem}
+.mark{width:38px;height:38px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:600;flex-shrink:0}
+.langs{margin-left:auto;display:inline-flex;padding:3px;border-radius:999px;background:var(--sand2);font-size:.8rem;font-weight:700}
+.langs button{border:0;background:transparent;color:var(--ink3);padding:.35rem .8rem;border-radius:999px;cursor:pointer;font:inherit;font-weight:700}
+.langs button[aria-current]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgb(0 0 0/.08)}
+.print{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:.4rem .9rem;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer}
+@media (max-width:560px){.print{display:none}}
+
+.hero{padding:2.75rem 0 1.25rem}
+.eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--brand)}
+.eyebrow::before{content:'';width:26px;height:1px;background:currentColor;opacity:.6}
+.hero h1{font-size:clamp(2rem,6vw,3rem);margin-top:.8rem}
+.hero p{color:var(--ink2);font-size:1.1rem;margin:.8rem 0 0;max-width:40rem}
+
+section{padding:1.5rem 0 1rem}
+.part{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+h2{font-size:clamp(1.5rem,4vw,2rem);margin:.5rem 0 .3rem}
+.sub{color:var(--ink2);margin:0 0 1.5rem}
+
+.steps{display:grid;gap:.9rem;counter-reset:s}
+.step{display:flex;gap:1rem;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.1rem 1.2rem}
+.step::before{counter-increment:s;content:counter(s);flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:600;font-size:1.05rem}
+.step b{display:block;font-size:1.05rem;margin-bottom:.15rem}
+.step p{margin:0;color:var(--ink2)}
+.step--plain::before{background:var(--gold);color:var(--ink)}
+
+.task{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.2rem 1.3rem;margin-bottom:.9rem}
+.task h3{font-size:1.2rem;display:flex;align-items:center;gap:.5rem}
+.task ol,.task ul{margin:.6rem 0 0;padding-left:1.2rem;color:var(--ink2)}
+.task li{margin:.35rem 0}
+.task li b{color:var(--ink)}
+
+.note{background:color-mix(in srgb,var(--brand) 8%,var(--sand));border:1px solid color-mix(in srgb,var(--brand) 22%,var(--sand));border-radius:16px;padding:1rem 1.2rem;color:var(--ink2);margin-top:1rem}
+.note b{color:var(--ink)}
+.cols{display:grid;gap:.9rem}
+@media(min-width:620px){.cols{grid-template-columns:1fr 1fr 1fr}}
+.pill{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1rem}
+.pill b{display:block;margin-bottom:.25rem}
+.pill span{color:var(--ink2);font-size:.95rem}
+
+footer{padding:2.5rem 0 3.5rem;color:var(--ink3);font-size:.9rem;text-align:center}
+footer a{font-weight:600}
+
+/* Language switching: show only the active language */
+body:not(.tl) [data-lang="tl"]{display:none}
+body.tl [data-lang="en"]{display:none}
+
+@media print{
+  header{position:static;background:none;border:0}
+  .langs,.print{display:none}
+  body{background:#fff}
+  .step,.task,.pill,.note{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="brand"><span class="mark">L</span> <span data-lang="en">Owner's Guide</span><span data-lang="tl">Gabay sa May-ari</span></span>
+    <span class="langs" role="group" aria-label="Language">
+      <button type="button" data-set="en" aria-current="true">EN</button>
+      <button type="button" data-set="tl">TL</button>
+    </span>
+    <button type="button" class="print" onclick="window.print()">Print / Save</button>
+  </div>
+</header>
+
+<!-- ============ ENGLISH ============ -->
+<main data-lang="en">
+  <div class="hero wrap">
+    <span class="eyebrow">Resort &amp; Pool Booking</span>
+    <h1>Your website, <em>made simple</em></h1>
+    <p>You don't need any tech skills. This guide shows the few easy steps to get your booking website live, and how to run everything from your phone.</p>
+  </div>
+
+  <section class="wrap">
+    <span class="part">Part 1</span>
+    <h2>Getting your website live</h2>
+    <p class="sub">One time only. We do the technical parts — you just prepare and approve.</p>
+    <div class="steps">
+      <div class="step"><div><b>Send your details</b><p>Message us with: your resort name, logo (a clear photo is fine), 4–8 good photos, your rates, GCash number or QR, phone number, Facebook or Messenger link, and your address.</p></div></div>
+      <div class="step"><div><b>Pick your web address</b><p>Something like <em>yourresort.com</em>. Don't have one yet? We'll help you choose and register it — about ₱600–1,000 a year, in your name, so it stays yours.</p></div></div>
+      <div class="step"><div><b>Pay the downpayment to start</b><p>Once we both agree on the plan, a downpayment starts the work. We set everything up for you.</p></div></div>
+      <div class="step"><div><b>Review your preview</b><p>We send you a private link to check everything — your photos, prices and colors. Tell us anything you want changed. We fix it.</p></div></div>
+      <div class="step"><div><b>Go live</b><p>We connect your web address, hand you your login, and do a short walkthrough call. Your website is now online for everyone.</p></div></div>
+    </div>
+    <div class="note"><b>That's it.</b> From here, you run everything from your phone — no computer needed.</div>
+  </section>
+
+  <section class="wrap">
+    <span class="part">Part 2</span>
+    <h2>Running it from your phone</h2>
+    <p class="sub">Open your website and add <b>/admin</b> at the end (like yourresort.com/admin), or open the installed app. Sign in with your email and password.</p>
+
+    <div class="task"><h3>✅ Approve a booking</h3><ol>
+      <li>New bookings appear on the <b>Today</b> screen under "Paid, waiting for you."</li>
+      <li>Tap the payment screenshot to see it bigger. Check your GCash for that exact amount.</li>
+      <li>Tap <b>Approve</b> — the date is now locked for that guest. (Or <b>Decline</b> to free the date.)</li>
+    </ol></div>
+
+    <div class="task"><h3>🏖️ On the day guests arrive</h3><ul>
+      <li><b>Arriving today</b> shows who's coming. When they arrive, open their booking and tap <b>Check in</b>.</li>
+      <li>Guests can show a <b>QR code</b> from their booking page — scanning it opens their details instantly.</li>
+    </ul></div>
+
+    <div class="task"><h3>📞 Add a phone or walk-in booking</h3><ul>
+      <li>Tap <b>Add booking</b>, fill in the date, package, name and number. It's confirmed right away and blocks the date so no one books over it.</li>
+    </ul></div>
+
+    <div class="task"><h3>💱 Change your prices</h3><ul>
+      <li>Go to <b>Rates</b>, tap a package, change the weekday or weekend price, and tap <b>Save</b>. New prices apply to new bookings.</li>
+    </ul></div>
+
+    <div class="task"><h3>📷 Add or change photos</h3><ul>
+      <li>Go to <b>Photos</b>, tap <b>Add photos</b> (from your camera or gallery). Reorder them; the first photo becomes your cover.</li>
+    </ul></div>
+
+    <div class="task"><h3>👥 Add your staff</h3><ul>
+      <li>Go to <b>More → Staff → Add a staff account</b>. Give each person their own email and password, so the history shows who approved each booking.</li>
+    </ul></div>
+
+    <div class="task"><h3>⚙️ Change your info anytime</h3><ul>
+      <li>Go to <b>Settings</b> to update your GCash, contact details, logo, colors, terms and more. It updates on your website right away.</li>
+    </ul></div>
+  </section>
+
+  <section class="wrap">
+    <span class="part">Part 3</span>
+    <h2>Install it as an app</h2>
+    <p class="sub">So it opens with one tap, like any other app.</p>
+    <div class="cols">
+      <div class="pill"><b>Android</b><span>Open your website, tap the menu, choose "Install app" — or open the APK we give you.</span></div>
+      <div class="pill"><b>iPhone / iPad</b><span>Open it in Safari, tap <em>Share</em>, then "Add to Home Screen."</span></div>
+      <div class="pill"><b>Windows / Mac</b><span>Open it in Chrome or Edge, click the install icon in the address bar.</span></div>
+    </div>
+    <div class="note"><b>Need help?</b> Message us anytime — your first two weeks of changes are free.</div>
+  </section>
+</main>
+
+<!-- ============ TAGALOG ============ -->
+<main data-lang="tl">
+  <div class="hero wrap">
+    <span class="eyebrow">Resort &amp; Pool Booking</span>
+    <h1>Ang website mo, <em>pinadaling-dali</em></h1>
+    <p>Hindi mo kailangang marunong sa computer. Ipapakita ng gabay na ito ang ilang madaling hakbang para mapa-live ang booking website mo, at kung paano patakbuhin lahat gamit ang phone mo.</p>
+  </div>
+
+  <section class="wrap">
+    <span class="part">Bahagi 1</span>
+    <h2>Pagpapa-live ng website mo</h2>
+    <p class="sub">Isang beses lang. Kami ang bahala sa mga teknikal — ikaw, maghanda at mag-aprub lang.</p>
+    <div class="steps">
+      <div class="step"><div><b>Ipadala ang detalye mo</b><p>I-message mo kami ng: pangalan ng resort, logo (OK na ang malinaw na larawan), 4–8 magagandang larawan, presyo mo, GCash number o QR, telepono, Facebook o Messenger link, at address mo.</p></div></div>
+      <div class="step"><div><b>Pumili ng web address</b><p>Tulad ng <em>resortmo.com</em>. Wala ka pa? Tutulungan ka naming pumili at magparehistro — mga ₱600–1,000 kada taon, nakapangalan sa iyo, kaya sa iyo talaga ito.</p></div></div>
+      <div class="step"><div><b>Magbayad ng downpayment para magsimula</b><p>Kapag sang-ayon na tayo sa plano, ang downpayment ang magsisimula ng trabaho. Kami na ang bahala sa buong setup.</p></div></div>
+      <div class="step"><div><b>Tingnan ang preview mo</b><p>Padadalhan ka namin ng pribadong link para suriin ang lahat — larawan, presyo, at kulay. Sabihin mo lang kung may papalitan. Aayusin namin.</p></div></div>
+      <div class="step"><div><b>I-live na</b><p>Ikokonekta namin ang web address mo, ibibigay ang login mo, at may maikling walkthrough call. Online na ang website mo para sa lahat.</p></div></div>
+    </div>
+    <div class="note"><b>Ayun lang.</b> Mula dito, phone mo lang ang gagamitin mo — walang computer na kailangan.</div>
+  </section>
+
+  <section class="wrap">
+    <span class="part">Bahagi 2</span>
+    <h2>Pagpapatakbo gamit ang phone mo</h2>
+    <p class="sub">Buksan ang website mo at dagdagan ng <b>/admin</b> sa dulo (hal. resortmo.com/admin), o buksan ang naka-install na app. Mag-sign in gamit ang email at password mo.</p>
+
+    <div class="task"><h3>✅ Mag-aprub ng booking</h3><ol>
+      <li>Lumalabas ang bagong booking sa <b>Today</b> screen sa ilalim ng "Paid, waiting for you."</li>
+      <li>I-tap ang screenshot ng bayad para lumaki. Tingnan sa GCash mo kung tama ang eksaktong halaga.</li>
+      <li>I-tap ang <b>Approve</b> — naka-lock na ang petsa para sa guest na iyon. (O <b>Decline</b> para buksan ulit ang petsa.)</li>
+    </ol></div>
+
+    <div class="task"><h3>🏖️ Sa araw na darating ang guests</h3><ul>
+      <li>Makikita sa <b>Arriving today</b> kung sino ang darating. Pagdating nila, buksan ang booking at i-tap ang <b>Check in</b>.</li>
+      <li>Puwedeng magpakita ang guest ng <b>QR code</b> mula sa booking page nila — i-scan mo para bumukas agad ang detalye nila.</li>
+    </ul></div>
+
+    <div class="task"><h3>📞 Magdagdag ng phone o walk-in booking</h3><ul>
+      <li>I-tap ang <b>Add booking</b>, ilagay ang petsa, package, pangalan at number. Kumpirmado agad at haharang sa petsa para walang makapatong na iba.</li>
+    </ul></div>
+
+    <div class="task"><h3>💱 Palitan ang presyo mo</h3><ul>
+      <li>Pumunta sa <b>Rates</b>, i-tap ang package, palitan ang weekday o weekend price, at i-tap ang <b>Save</b>. Para sa bagong booking ang bagong presyo.</li>
+    </ul></div>
+
+    <div class="task"><h3>📷 Magdagdag o magpalit ng larawan</h3><ul>
+      <li>Pumunta sa <b>Photos</b>, i-tap ang <b>Add photos</b> (mula sa camera o gallery). Ayusin ang pagkakasunod; ang unang larawan ang magiging cover.</li>
+    </ul></div>
+
+    <div class="task"><h3>👥 Magdagdag ng staff</h3><ul>
+      <li>Pumunta sa <b>More → Staff → Add a staff account</b>. Bigyan ang bawat isa ng sariling email at password, para makita sa history kung sino ang nag-aprub ng bawat booking.</li>
+    </ul></div>
+
+    <div class="task"><h3>⚙️ Palitan ang info mo kahit kailan</h3><ul>
+      <li>Pumunta sa <b>Settings</b> para baguhin ang GCash, contact, logo, kulay, terms, at iba pa. Agad itong nag-a-update sa website mo.</li>
+    </ul></div>
+  </section>
+
+  <section class="wrap">
+    <span class="part">Bahagi 3</span>
+    <h2>I-install bilang app</h2>
+    <p class="sub">Para isang tap lang bumukas, parang kahit anong app.</p>
+    <div class="cols">
+      <div class="pill"><b>Android</b><span>Buksan ang website, i-tap ang menu, piliin ang "Install app" — o buksan ang APK na ibibigay namin.</span></div>
+      <div class="pill"><b>iPhone / iPad</b><span>Buksan sa Safari, i-tap ang <em>Share</em>, tapos "Add to Home Screen."</span></div>
+      <div class="pill"><b>Windows / Mac</b><span>Buksan sa Chrome o Edge, i-click ang install icon sa address bar.</span></div>
+    </div>
+    <div class="note"><b>Kailangan ng tulong?</b> I-message mo lang kami kahit kailan — libre ang mga pagbabago sa unang dalawang linggo.</div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Resort &amp; Pool Booking · <a href="mailto:ce.columna404@gmail.com">ce.columna404@gmail.com</a><br>Website by <a href="https://chesterewing.github.io/shop.html" target="_blank" rel="noopener">chstr.dev</a></p>
+</footer>
+
+<script>
+(function(){
+  try{ if(localStorage.getItem('rb-guide-lang')==='tl') document.body.classList.add('tl'); }catch(e){}
+  function set(l){
+    document.body.classList.toggle('tl', l==='tl');
+    document.documentElement.lang = l==='tl' ? 'fil' : 'en';
+    document.querySelectorAll('.langs button').forEach(function(b){ if(b.dataset.set===l) b.setAttribute('aria-current','true'); else b.removeAttribute('aria-current'); });
+    try{ localStorage.setItem('rb-guide-lang', l); }catch(e){}
+  }
+  document.querySelectorAll('.langs button').forEach(function(b){ b.addEventListener('click', function(){ set(b.dataset.set); }); });
+  if(document.body.classList.contains('tl')) set('tl');
+})();
+</script>
+</body>
+</html>
