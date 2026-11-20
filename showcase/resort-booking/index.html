@@ -1,0 +1,50 @@
+<!doctype html>
+<!--
+  Resort & Pool Booking — interactive DEMO.
+  Static HTML + JS only, saved to the viewer's own browser (localStorage), so
+  every visitor gets a private sandbox. The real product is PHP + MySQL with a
+  live database, email and cross-device sync; this preview mirrors its design
+  and flow. Built by chstr.dev.
+-->
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Resort &amp; Pool Booking — Live Demo</title>
+<meta name="description" content="Interactive demo of a booking website and owner app for private resorts and pool rentals. Try the customer booking flow and the owner dashboard.">
+<meta name="robots" content="noindex">
+<link rel="preload" href="assets/fonts/fraunces-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/admin.css">
+<link rel="stylesheet" href="assets/demo.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<!-- Demo control bar: switch between the customer site and the owner app -->
+<div class="demo-bar" id="demo-bar">
+  <div class="demo-bar__brand">
+    <span class="demo-dot"></span>
+    <b>Live demo</b>
+    <span class="demo-bar__note">Sample data saved in your browser only</span>
+  </div>
+  <div class="demo-seg" role="group" aria-label="Switch view">
+    <button type="button" data-view="customer" class="is-on">Customer site</button>
+    <button type="button" data-view="owner">Owner app</button>
+  </div>
+  <div class="demo-bar__actions">
+    <button type="button" id="demo-reset" class="demo-reset" title="Clear the sample data and start over">Reset</button>
+    <a class="demo-buy" href="mailto:ce.columna404@gmail.com?subject=Resort%20%26%20Pool%20Booking%20inquiry">Get this for my resort</a>
+  </div>
+</div>
+
+<div id="app" class="demo-stage"></div>
+
+<div class="demo-hint" id="demo-hint" hidden></div>
+
+<script src="assets/qrcode.min.js" defer></script>
+<script src="assets/demo.js" defer></script>
+</body>
+</html>

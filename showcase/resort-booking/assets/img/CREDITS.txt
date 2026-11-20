@@ -1,0 +1,9 @@
+Demo photos, free to use under the Pexels License (https://www.pexels.com/license/).
+They are for the demo only. Each client uploads their own resort photos,
+so never ship these as if they show the client's property.
+
+cottages-pool.jpg  https://www.pexels.com/photo/poolside-with-deckchairs-on-resort-6129989/
+tropical-pool.jpg  https://www.pexels.com/photo/swimming-pool-on-tropical-resort-14024023/
+pool-night.jpg     https://www.pexels.com/photo/a-swimming-pool-of-a-hotel-at-night-7974837/
+poolside.jpg       https://www.pexels.com/photo/a-swimming-pool-at-a-resort-16144274/
+aerial.jpg         https://www.pexels.com/photo/aerial-photo-of-swimming-pool-1025344/

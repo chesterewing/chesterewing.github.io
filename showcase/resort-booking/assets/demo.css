@@ -1,0 +1,79 @@
+/* Demo-only chrome: the top control bar, the preview banner, hints.
+   Everything else is the product's real stylesheets (app/site/admin.css). */
+
+:root { --demo-bar-h: 56px; }
+
+.demo-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: var(--demo-bar-h);
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0 16px;
+  background: #0f1a17; color: #f3efe7;
+  border-bottom: 1px solid rgb(255 255 255 / .08);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.demo-bar__brand { display: flex; align-items: center; gap: .5rem; font-size: .9rem; }
+.demo-bar__brand b { font-weight: 600; }
+.demo-dot { width: 8px; height: 8px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 0 3px rgb(61 220 132 / .25); flex-shrink: 0; }
+.demo-bar__note { color: rgb(243 239 231 / .55); font-size: .8rem; }
+@media (max-width: 760px) { .demo-bar__note { display: none; } }
+
+.demo-seg { display: inline-flex; margin: 0 auto; padding: 3px; border-radius: 999px; background: rgb(255 255 255 / .08); }
+.demo-seg button {
+  border: 0; background: transparent; color: rgb(243 239 231 / .7);
+  font: inherit; font-size: .85rem; font-weight: 600; padding: .4rem .9rem;
+  border-radius: 999px; cursor: pointer; white-space: nowrap;
+}
+.demo-seg button.is-on { background: #c39a55; color: #15231f; }
+
+.demo-bar__actions { display: flex; align-items: center; gap: .5rem; }
+.demo-reset {
+  border: 1px solid rgb(255 255 255 / .18); background: transparent; color: #f3efe7;
+  font: inherit; font-size: .82rem; font-weight: 600; padding: .4rem .8rem;
+  border-radius: 999px; cursor: pointer;
+}
+.demo-reset:hover { background: rgb(255 255 255 / .08); }
+.demo-buy {
+  background: #0f5257; color: #fff; text-decoration: none;
+  font-size: .82rem; font-weight: 600; padding: .45rem .9rem; border-radius: 999px;
+  white-space: nowrap;
+}
+.demo-buy:hover { background: #0b4247; }
+@media (max-width: 620px) {
+  .demo-bar { gap: .5rem; }
+  .demo-buy { display: none; }
+  .demo-seg button { padding: .4rem .7rem; font-size: .8rem; }
+}
+
+/* The product renders below the fixed bar */
+.demo-stage { padding-top: var(--demo-bar-h); }
+
+/* The product's own sticky headers must sit below the demo bar */
+.demo-stage .site-header,
+.demo-stage .topbar { top: var(--demo-bar-h); }
+.demo-stage .side { top: var(--demo-bar-h); }
+.demo-stage .book-aside { top: calc(var(--demo-bar-h) + 24px); }
+
+/* A small floating hint that points at what to try first */
+.demo-hint {
+  position: fixed; z-index: 150;
+  left: 50%; bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  display: flex; align-items: center; gap: .6rem;
+  padding: .7rem 1rem; border-radius: 14px;
+  background: #15231f; color: #f3efe7;
+  font-family: 'Inter', system-ui, sans-serif; font-size: .88rem; font-weight: 500;
+  box-shadow: 0 12px 40px rgb(0 0 0 / .3);
+}
+.demo-hint b { color: #e6c58d; }
+.demo-hint button { margin-left: .3rem; border: 0; background: transparent; color: rgb(243 239 231 / .6); font-size: 1.1rem; cursor: pointer; line-height: 1; }
+@media (min-width: 960px) { .demo-hint { bottom: 1.25rem; } }
+
+/* Preview ribbon inside the owner app so no one mistakes it for live data */
+.demo-flag {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .25rem .65rem; border-radius: 999px;
+  background: #f6ecda; color: #8a5a12;
+  font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+}

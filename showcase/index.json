@@ -54,7 +54,7 @@
       "category": "SaaS / Resort Booking",
       "description": "A complete booking website and owner app for private resorts and pool rentals. Live availability calendar with no double bookings, day tour, overnight and 22-hour rates, GCash downpayment with screenshot upload, check-in QR, and an owner dashboard to approve bookings from a phone. English and Tagalog. Installs as an app on Android, iPhone and Windows.",
       "price": "",
-      "status": "demo-on-request",
+      "status": "live-demo",
       "preview": "preview.jpg",
       "tags": [
         "PHP",
@@ -65,7 +65,7 @@
         "PWA / APK",
         "English + Tagalog"
       ],
-      "buyUrl": "mailto:ce.columna404@gmail.com?subject=Demo%20request%3A%20Resort%20%26%20Pool%20Booking"
+      "buyUrl": "mailto:ce.columna404@gmail.com?subject=Resort%20%26%20Pool%20Booking%20for%20my%20resort"
     },
     {
       "slug": "saas-suite-bookings",

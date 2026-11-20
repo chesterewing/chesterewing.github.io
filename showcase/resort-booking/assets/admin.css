@@ -1,0 +1,171 @@
+/* ==========================================================================
+   Owner app theme: Tropical Luxe, tuned for daily work.
+   Same family as the guest site (sand, deep teal, gold, Fraunces + Inter)
+   but calmer: fewer flourishes, bigger tap targets, numbers first.
+   Loaded after app.css on /admin pages only.
+   ========================================================================== */
+
+@font-face { font-family: 'Fraunces'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(fonts/fraunces-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(fonts/inter-normal.woff2) format('woff2'); }
+
+.admin-body {
+  --sand: #f5f1ea;
+  --sand-2: #ece5d9;
+  --ink: #15231f;
+  --ink-2: #4a5753;
+  --ink-3: #828b87;
+  --gold: #c39a55;
+  --gold-soft: #f6ecda;
+  --bg: var(--sand);
+  --surface: #fffdf9;
+  --text: var(--ink);
+  --muted: var(--ink-2);
+  --subtle: var(--ink-3);
+  --line: #e8e0d3;
+  --brand-soft: color-mix(in srgb, var(--brand) 9%, #fffdf9);
+  --brand-line: color-mix(in srgb, var(--brand) 24%, #fffdf9);
+  --warn-soft: #fbf1df;
+  --radius: 18px;
+  --shadow: 0 1px 2px rgb(21 35 31 / .04), 0 6px 20px rgb(21 35 31 / .06);
+  --serif: 'Fraunces', Georgia, serif;
+  --font: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font);
+  background: var(--sand);
+}
+.admin-body h1, .admin-body h2, .admin-body .serif { font-family: var(--serif); font-weight: 500; letter-spacing: -0.015em; }
+.admin-body h3 { font-weight: 650; font-size: 1.05rem; letter-spacing: -0.005em; }
+.admin-body .btn { border-radius: 12px; }
+.admin-body .card { border-radius: var(--radius); border-color: var(--line); box-shadow: none; }
+
+/* ---------- top bar ---------- */
+.admin-body .topbar { background: color-mix(in srgb, var(--sand) 88%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.admin-body .topbar.scrolled { border-bottom-color: var(--line); }
+.admin-body .topbar .wrap { min-height: 64px; }
+.admin-body .topbar h1 { font-size: 1.55rem; }
+
+/* ---------- dark sidebar (tablet landscape and up) ---------- */
+@media (min-width: 960px) {
+  .admin-body .side { background: var(--ink); border-right: 0; color: rgb(243 239 231 / .75); padding: 1.4rem 1rem; }
+  .admin-body .side .brand { color: #f3efe7; font-family: var(--serif); font-weight: 600; font-size: 1.1rem; }
+  .admin-body .side .brand__mark { background: var(--gold); color: var(--ink); border-radius: 50%; font-family: var(--serif); }
+  .admin-body .side a.nav { color: rgb(243 239 231 / .68); border-radius: 12px; font-weight: 500; }
+  .admin-body .side a.nav:hover { background: rgb(255 255 255 / .06); color: #fff; }
+  .admin-body .side a.nav[aria-current] { background: rgb(255 255 255 / .1); color: #fff; box-shadow: inset 3px 0 0 var(--gold); }
+  .admin-body .side a.nav svg { opacity: .9; }
+  .admin-body .side .count { background: var(--gold); color: var(--ink); }
+  .admin-body .side__foot { border-top-color: rgb(255 255 255 / .1); }
+  .admin-body .side__foot .btn { background: rgb(255 255 255 / .06); border-color: rgb(255 255 255 / .1); color: #f3efe7; }
+  .admin-body .side__foot .btn--primary { background: var(--gold); border-color: var(--gold); color: var(--ink); box-shadow: none; }
+  .admin-body .side__foot .btn--ghost { background: transparent; border-color: transparent; color: rgb(243 239 231 / .6); }
+  .admin-body .side .credit, .admin-body .side .credit a { color: rgb(243 239 231 / .4); }
+  .admin-body .side__section { margin: 1rem .8rem .35rem; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgb(243 239 231 / .35); }
+}
+
+/* ---------- bottom tab bar (phones) ---------- */
+.admin-body .tabbar { background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top-color: var(--line); }
+.admin-body .tabbar a { color: var(--ink-3); font-weight: 600; }
+.admin-body .tabbar a[aria-current] { color: var(--ink); }
+.admin-body .tabbar a[aria-current] svg { background: var(--gold-soft); color: var(--ink); border-radius: 999px; padding: 3px 14px; width: 54px; height: 30px; margin-top: -3px; }
+.admin-body .tabbar .count { background: var(--bad); }
+
+/* ---------- Today: welcome card ---------- */
+.hello { position: relative; isolation: isolate; overflow: hidden; border-radius: 24px; padding: 1.5rem; color: #fff; min-height: 180px; display: flex; flex-direction: column; justify-content: flex-end; gap: .4rem; }
+.hello img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.hello::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(10 20 18 / .15), rgb(10 20 18 / .78)); }
+.hello small { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; opacity: .85; }
+.hello h2 { font-size: clamp(1.7rem, 4vw, 2.3rem); line-height: 1.1; }
+.hello p { opacity: .9; }
+.hello .row { margin-top: .6rem; }
+.hello .btn { min-height: 42px; padding: .5rem 1rem; font-size: .92rem; }
+.hello .btn--glass { background: rgb(255 255 255 / .16); color: #fff; border-color: rgb(255 255 255 / .3); backdrop-filter: blur(6px); }
+.hello .btn--gold { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+@media (min-width: 700px) { .hello { min-height: 220px; padding: 2rem; } }
+
+/* ---------- stats ---------- */
+.admin-body .stat { border-radius: 18px; border-color: var(--line); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .2rem; transition: transform .15s, border-color .15s; }
+.admin-body .stat:hover { border-color: var(--brand-line); }
+.admin-body .stat small { font-size: .78rem; font-weight: 600; color: var(--ink-3); }
+.admin-body .stat b { font-family: var(--serif); font-weight: 500; font-size: 2rem; letter-spacing: -0.02em; line-height: 1.1; }
+.admin-body .stat--alert { background: var(--gold-soft); border-color: #ecd9b6; }
+.admin-body .stat--alert b { color: #8a5a12; }
+.stat .spark { margin-top: auto; height: 28px; display: flex; align-items: flex-end; gap: 3px; }
+.stat .spark i { flex: 1; background: var(--brand); opacity: .25; border-radius: 3px 3px 0 0; min-height: 2px; }
+.stat .spark i:last-child { opacity: 1; }
+
+/* ---------- section headings ---------- */
+.sec-title { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.sec-title h3 { font-family: var(--serif); font-weight: 500; font-size: 1.35rem; letter-spacing: -0.01em; }
+.sec-title a { font-size: .9rem; font-weight: 600; text-decoration: none; }
+
+/* ---------- next 14 days strip ---------- */
+.strip { display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); gap: 4px; }
+.strip a { display: grid; gap: 3px; text-decoration: none; color: var(--ink-3); text-align: center; font-size: .68rem; font-weight: 600; }
+.strip a b { font-size: .85rem; color: var(--ink); font-weight: 700; }
+.strip a.is-weekend b { color: var(--brand); }
+.strip .half { height: 14px; border-radius: 4px; }
+@media (max-width: 520px) { .strip { grid-template-columns: repeat(7, minmax(0, 1fr)); row-gap: 10px; } }
+
+/* ---------- list rows ---------- */
+.admin-body .item { border-radius: 16px; border-color: var(--line); padding: .85rem .95rem; gap: .85rem; transition: border-color .15s, transform .15s; }
+.admin-body .item:hover { border-color: var(--brand-line); transform: translateY(-1px); }
+.admin-body .item__date { background: var(--sand); border-radius: 12px; width: 54px; }
+.admin-body .item__date small { color: var(--ink-3); letter-spacing: .06em; }
+.admin-body .item__date b { font-family: var(--serif); font-weight: 500; font-size: 1.45rem; }
+.admin-body .item__main b { font-weight: 650; }
+
+/* ---------- approve cards ---------- */
+.approve-card { display: grid; gap: 1rem; padding: 1.1rem; background: var(--surface); border: 1px solid #ecd9b6; border-radius: 20px; box-shadow: 0 0 0 4px var(--gold-soft); }
+@media (min-width: 700px) { .approve-card { grid-template-columns: 180px 1fr; align-items: start; } }
+.approve-card .receipt { cursor: zoom-in; }
+.approve-card .receipt img { max-height: 220px; width: 100%; object-fit: cover; object-position: top; }
+.approve-card .amount { font-family: var(--serif); font-size: 1.6rem; font-weight: 500; }
+
+/* ---------- booking detail ---------- */
+.bk-head { display: grid; gap: .5rem; padding: 1.4rem; border-radius: 22px; background: var(--ink); color: #f3efe7; }
+.bk-head .muted, .bk-head .subtle { color: rgb(243 239 231 / .7); }
+.bk-head h2 { font-size: clamp(1.7rem, 4vw, 2.2rem); color: #fff; }
+.bk-head .ref { color: rgb(243 239 231 / .6); }
+.bk-head .badge--ok { background: rgb(61 220 132 / .15); color: #7ee2a8; }
+.bk-head .badge--warn { background: rgb(195 154 85 / .2); color: #e6c58d; }
+.bk-head .badge--bad { background: rgb(255 120 120 / .15); color: #ffa3a3; }
+.bk-head .badge--muted { background: rgb(255 255 255 / .1); color: rgb(243 239 231 / .8); }
+.bk-money { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin-top: .6rem; }
+.bk-money div { background: rgb(255 255 255 / .06); border-radius: 12px; padding: .6rem .7rem; }
+.bk-money small { display: block; font-size: .72rem; color: rgb(243 239 231 / .6); font-weight: 600; }
+.bk-money b { font-family: var(--serif); font-weight: 500; font-size: 1.2rem; color: #fff; }
+.bk-money .due b { color: #e6c58d; }
+
+/* ---------- calendar ---------- */
+.admin-body .admin-cal .cal__day { background: var(--sand); border-radius: 12px; }
+.admin-body .admin-cal .cal__day.is-selected { background: var(--surface); border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+.admin-body .half.booked { background: var(--brand); }
+.admin-body .half.pending { background: var(--gold); }
+.cal__who { display: none; font-size: .68rem; font-weight: 600; color: var(--ink-2); text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.25; }
+@media (min-width: 760px) { .cal__who { display: block; } .admin-body .admin-cal .cal__day { min-height: 96px; } }
+
+/* ---------- panels, tabs, forms ---------- */
+.admin-body details.panel { border-radius: 18px; border-color: var(--line); }
+.admin-body .tabs a { border-color: var(--line); background: var(--surface); }
+.admin-body .tabs a[aria-current] { background: var(--ink); border-color: var(--ink); }
+.admin-body input[type=text], .admin-body input[type=email], .admin-body input[type=tel], .admin-body input[type=number],
+.admin-body input[type=password], .admin-body input[type=date], .admin-body input[type=url], .admin-body select, .admin-body textarea { border-color: var(--line); border-radius: 12px; background: var(--surface); }
+.admin-body .platform__icon { background: var(--sand); color: var(--brand); }
+.admin-body .empty svg { color: var(--gold); }
+.admin-body .alert--ok { background: #e7f3ea; }
+.admin-body .alert--warn { background: var(--gold-soft); color: #7a5112; }
+
+/* ---------- zoom viewer for receipts ---------- */
+.zoom { position: fixed; inset: 0; z-index: 100; background: rgb(8 14 13 / .95); display: grid; place-items: center; padding: 16px; cursor: zoom-out; }
+.zoom img { max-width: 100%; max-height: 100%; border-radius: 8px; }
+.zoom button { position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgb(255 255 255 / .2); background: rgb(255 255 255 / .1); color: #fff; font-size: 1.3rem; cursor: pointer; }
+
+/* ---------- sign-in screen ---------- */
+.auth-split { min-height: 100vh; display: grid; background: var(--sand); }
+@media (min-width: 900px) { .auth-split { grid-template-columns: 1.1fr 1fr; } }
+.auth-split__art { position: relative; display: none; isolation: isolate; color: #fff; padding: 3rem; flex-direction: column; justify-content: flex-end; }
+.auth-split__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.auth-split__art::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(10 20 18 / .1), rgb(10 20 18 / .75)); }
+.auth-split__art h2 { font-size: 2.6rem; max-width: 14ch; line-height: 1.05; }
+@media (min-width: 900px) { .auth-split__art { display: flex; } }
+.auth-split__form { display: grid; place-items: center; padding: 2rem 20px; }
+.auth-split__form form { width: 100%; max-width: 400px; }
